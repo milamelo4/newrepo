@@ -12,6 +12,7 @@
   --lighter-blue: hsl(203, 65%, 58%);
   --blue-green: hsl(186, 36%, 48%);
   --dark-green: hsl(94, 22%, 29%);
+  --text-color: #000000;
 
 }
 
@@ -30,7 +31,7 @@ body {
 .siteName a {
   font-family: var(--font-header);
   font-weight: 700;
-  color: black;
+  color: var(--text-color);
   text-decoration: none;
   font-size: clamp(30px, 5vw, 34px);
 }
@@ -73,7 +74,7 @@ nav li {
 .welcome-detail {
   color: var(--dark-green);
   font-weight: 800;
-  text-shadow: 0px 0px 1px black;
+  text-shadow: 0px 0px 1px var(--text-color);
 }
 
 .welcome-container {
@@ -150,7 +151,7 @@ nav li {
   align-items: center;
   justify-content: center;
   background-color: var(--dark-green);
-  box-shadow: 0 0 5PX black;
+  box-shadow: 0 0 5PX var(--text-color);
   padding: 10px;
   text-align: center;
 }
