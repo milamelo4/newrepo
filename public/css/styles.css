@@ -22,125 +22,268 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: var(--font-body);
+}
 
+/***** Header ****/
+.siteName a {
+  font-family: var(--font-header);
+  font-weight: 700;
+  color: black;
+  text-decoration: none;
+  font-size: clamp(30px, 5vw, 34px);
+}
+
+#top-header {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+}
+
+.tools a {
+  text-decoration: none;
+  color: hsl(0, 0%, 0%);
+}
+
+ /**** Navigation ****/
+nav {
+  background-color: var(--dark-green);
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+}
+
+nav li {
+  color: white;
+  list-style: none;
+  margin-inline: 10px;
+  justify-content: center;
+  font-size: 22px;
+  padding-block: 2%;
+}
+
+  /**** Welcome information ****/
+ .welcome-msg {
+   font-size: clamp(22px, 5vw, 40px);
+}
+
+.welcome-detail {
+  color: var(--dark-green);
+  font-weight: 800;
+  text-shadow: 0px 0px 1px black;
+}
+
+.welcome-container {
+  display: flex;}
+
+/**** Description Call of action ****/
+.description-container {
+  position: relative;
+}
+
+.description-cars {
+  color: var(--dark-green);
+  position: absolute;
+  background-color: hsla(94, 22%, 29%, 0.155);
+  bottom: 3rem;
+  left: 5rem;
+  padding: 3%;
+}
+
+.description-cars li {
+  list-style: none;
+  font-size: clamp(18px, 5vw, 20px);
+  line-height: 1.3em;
+  font-weight: 700;
+}
+
+.description-cars li:nth-child(1) {
+  font-size: clamp(22px, 5vw, 24px);
+  font-weight: 800;
+}
+
+.description-container img {
+  width: clamp(150px, 50vw, 200px);
+  margin-top: 10px;
+}
+
+.upgrades-reviews-container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 1fr auto;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.reviews {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  background-color: hsla(94, 22%, 29%, 0.155);
+  padding: 10px;
+}
+
+/**** Reviews ****/
+.reviews ul li {
+  line-height: 3em;
+  font-weight: 600;
+}
+
+/**** Upgrades ****/
+.upgrades-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  background-color: white;
+  padding: 10px 5px;
+}
+
+ .upgrades-container h2 {
+   grid-column: span 2;
+ }
+
+.upgrades-container p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--dark-green);
+  box-shadow: 0 0 5PX black;
+  padding: 10px;
+  text-align: center;
+}
+
+.upgrades-container img {
+  max-width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.upgrades-container a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border: 1px solid white;
+  padding: 3%;
+  margin: 3%;
+  border-radius: 5px;
+}
+
+/**** Large View ****/
+@media (min-width: 1024px) {
+  body {
+    background-image: url('/images/site/small_check.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left;
+
+  }
+  main, #wrapper, footer{
+    width: 60em;
+    margin-inline: auto;
+    background-color: white;
+    margin-block: 0;
+    padding: 2% 1%;
+    /* border: 1px solid var(--dark-green); */
+  }
+
+  .tools a {
+    align-self: center;
+  }
+
+  /**** Navigation ****/
+  nav {
+    margin-top: 35px;
+  }
+
+  /**** Welcome information ****/
+  .welcome-container {
+    justify-content: center;
+    padding-bottom: 50px;
+  }
+
+  /**** Description Call of action ****/
+  .description-cars li {
+    font-weight: 700;
+  }
+
+  /**** Grid container (Upgrades/Reviews) ****/
+  .reviews h2 {
+    margin-left: 5px;
+  }
+
+  /**** Upgrades ****/
+  .upgrades-container {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+
+  .upgrades-container h2 {
+    margin-bottom: 0;
+  }
+
+  footer {
+    background-color: var(--dark-green);
+    color: white;
+  }
+}
 
 
 
 /**** Mobile View ***/
 @media screen and (max-width: 600px) {
-  /* Styles for mobile devices */
-
-  body {
-    /* background-color: red; */
-    font-family: var(--font-body);
-  }
-  
-  .siteName a {
-    text-decoration: none;
-    font-size: 30px;
-    font-family: var(--font-header);
-    font-weight: 700;
-    color: black;
-  }
-
-  #top-header {
-    display: grid;
-    grid-template-columns: 1fr auto;
-  }
+  /**** Header ****/
   .tools a {
     margin-top: 10px;
-    text-decoration: none;
-    color: hsl(0, 0%, 0%);
   }
 
-  nav {
-    background-color: rgb(16, 15, 15);
-    & ul {
-      display: flex;
-      justify-content: space-between;
-      padding: 0;
-     
-      
-    }
-
-    & li {
-      color: white;
-      list-style: none;
-      padding-block: 4%;
-      margin-inline: 10px;
-      justify-content: center;
-    }
-  } 
-
-  .welcome-msg {
-    font-size: 22px;
+  /**** Navigation ****/
+  nav li {
+    padding-block: 4%;
   }
 
-  .hero {
-    position: relative;
+  /**** Welcome information ****/
+  .welcome-container {
+    justify-content: end;
   }
 
-  .description-car {
-    color: var(--lighter-blue);
-    position: absolute;
-    bottom: 1.2rem;
-    background-color: rgba(249, 238, 238, 0.811);
-    padding: 3%;
-    & li{
-    list-style: none;
-    font-size: 22px;
-    line-height: 1.2em;
+  .welcome-container img {
+    width: 75%;
+    max-width: 100%;
+  }
+
+  /**** Description Call of action ****/
+  .description-cars {
+    bottom: 0.8rem;
+    padding: 1% 3%;
+    left: 20px;
+  }  
+
+  .description-cars li {
     font-weight: 600;
   }
-  
+
+  /**** Reviews ****/
+  .upgrades-reviews-container {
+    display: block;
   }
-  .description-car li:nth-child(1) {
-    font-size: 26px;
+
+  .reviews h2, .upgradeH2 {
+    margin-bottom: 0;
+  }
+
+  /**** Upgrades ****/
+  .upgrades-container p {
+    margin-bottom: -20px;
+  }
+
+  footer p {
     font-weight: 800;
-  }
-  .hero img {
-    width: 150px;
-    margin-top: 10px;
-  }
-
-  .reviews h2, .main-img-container h2 {
-    margin-left: 10px;
-  }
-
-  .reviews ul li {
-    line-height: 2em;
-    font-weight: 600;
-  }
-
-  /* .main-img-container {
-    
-  }*/
-  .main-img-container  {
-    list-style: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-   grid-template-rows: 1fr 1fr;
-    
-    gap: 10px;
-    margin: 10px;
-    
-  } 
-    .img-container {
-      background-color: var(--darker-blue);
-    }
-  .img-container img{
-    display: flex;
-    width: 90px;
-    margin-left: 50px;
-    
-  }
-
-  .img-container a {
-    display: flex;
-    
-    background-color: white;
-    margin-bottom: 3%;
-    text-align: center;
-    
+    color: var(--dark-green);
+    margin-block: 20px;
+    padding-top: 10px;
   }
 }
