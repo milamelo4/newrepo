@@ -1,6 +1,146 @@
+/**** Fonts ****/
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/**** Variables ****/
+:root {
+  --font-header: "Lora", serif;
+  --font-body: "Inter", sans-serif;
+  --darker-blue: hsl(225, 41%, 39%);
+  --bright-blue: hsl(214, 66%, 56%);
+  --lighter-blue: hsl(203, 65%, 58%);
+  --blue-green: hsl(186, 36%, 48%);
+  --dark-green: hsl(94, 22%, 29%);
+
+}
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+
+
+
+
+/**** Mobile View ***/
+@media screen and (max-width: 600px) {
+  /* Styles for mobile devices */
+
+  body {
+    /* background-color: red; */
+    font-family: var(--font-body);
+  }
+  
+  .siteName a {
+    text-decoration: none;
+    font-size: 30px;
+    font-family: var(--font-header);
+    font-weight: 700;
+    color: black;
+  }
+
+  #top-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+  .tools a {
+    margin-top: 10px;
+    text-decoration: none;
+    color: hsl(0, 0%, 0%);
+  }
+
+  nav {
+    background-color: rgb(16, 15, 15);
+    & ul {
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+     
+      
+    }
+
+    & li {
+      color: white;
+      list-style: none;
+      padding-block: 4%;
+      margin-inline: 10px;
+      justify-content: center;
+    }
+  } 
+
+  .welcome-msg {
+    font-size: 22px;
+  }
+
+  .hero {
+    position: relative;
+  }
+
+  .description-car {
+    color: var(--lighter-blue);
+    position: absolute;
+    bottom: 1.2rem;
+    background-color: rgba(249, 238, 238, 0.811);
+    padding: 3%;
+    & li{
+    list-style: none;
+    font-size: 22px;
+    line-height: 1.2em;
+    font-weight: 600;
+  }
+  
+  }
+  .description-car li:nth-child(1) {
+    font-size: 26px;
+    font-weight: 800;
+  }
+  .hero img {
+    width: 150px;
+    margin-top: 10px;
+  }
+
+  .reviews h2, .main-img-container h2 {
+    margin-left: 10px;
+  }
+
+  .reviews ul li {
+    line-height: 2em;
+    font-weight: 600;
+  }
+
+  /* .main-img-container {
+    
+  }*/
+  .main-img-container  {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+   grid-template-rows: 1fr 1fr;
+    
+    gap: 10px;
+    margin: 10px;
+    
+  } 
+    .img-container {
+      background-color: var(--darker-blue);
+    }
+  .img-container img{
+    display: flex;
+    width: 90px;
+    margin-left: 50px;
+    
+  }
+
+  .img-container a {
+    display: flex;
+    
+    background-color: white;
+    margin-bottom: 3%;
+    text-align: center;
+    
+  }
 }
