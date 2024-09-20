@@ -38,7 +38,7 @@ footer {
   width: 62em;
   margin-block: 0;
   padding: 0;
-  margin-inline: 5px;
+  /* margin-inline: 5px; */
 }
 
 .siteName a {
@@ -63,20 +63,22 @@ footer {
  /**** Navigation ****/
 nav {
   background-color: var(--dark-green);
+  
 }
 
 nav ul {
   display: flex;
   justify-content: space-evenly;
   padding: 0;
+  list-style-position: inside;
 }
 
 nav li {
   color: var(--text-white);
   list-style: none;
-  margin-inline: 10px;
+  /* margin-inline: 10px; */
   justify-content: center;
-  font-size: 22px;
+  font-size: 20px;
   padding-block: 4%; 
 }
 
@@ -95,13 +97,13 @@ nav li {
 
 .welcome-container {
   display: flex;
-  justify-content: center;  
+  justify-content: right;  
 }
 
 .welcome-container img { 
   width: 95%;
   max-width: 60%;
-  margin-left: 35px;
+  
 }
 
 /**** Description Call of action ****/
@@ -114,7 +116,7 @@ nav li {
   color: var(--dark-green);
   position: absolute;
   background-color: hsla(94, 22%, 29%, 0.155);
-  bottom: 1.5rem;
+  bottom: -1.5rem;
   padding: 1% 3%;
   left: 0.8rem;
 }
