@@ -12,7 +12,8 @@
   --lighter-blue: hsl(203, 65%, 58%);
   --blue-green: hsl(186, 36%, 48%);
   --dark-green: hsl(94, 22%, 29%);
-  --text-color: #000000;
+  --text-black: hsl(0, 0%, 0%);
+  --text-white: hsl(0, 0%, 100%);
 
 }
 
@@ -28,20 +29,22 @@ body {
   max-width: 100%;
 }
 
+/******* Global/Mobile version ***************/
+/***** Header ****/
 main,
 #wrapper,
 footer {
   max-width: 100%;
-  width: 60em;
+  width: 62em;
   margin-block: 0;
   padding: 0;
+  margin-inline: 5px;
 }
 
-/***** Header ****/
 .siteName a {
   font-family: var(--font-header);
   font-weight: 700;
-  color: var(--text-color);
+  color: var(--text-black);
   text-decoration: none;
   font-size: clamp(30px, 5vw, 34px);
 }
@@ -53,8 +56,8 @@ footer {
 
 .tools a {
   text-decoration: none;
-  color: hsl(0, 0%, 0%);
-   margin-top: 10px; /*from mobile */
+  color: var(--text-black);
+  margin-top: 10px; /*from mobile */
 }
 
  /**** Navigation ****/
@@ -69,54 +72,56 @@ nav ul {
 }
 
 nav li {
-  color: white;
+  color: var(--text-white);
   list-style: none;
   margin-inline: 10px;
   justify-content: center;
   font-size: 22px;
-  padding-block: 4%; /*from mobile*/
+  padding-block: 4%; 
 }
 
   /**** Welcome information ****/
  .welcome-msg {
    font-size: clamp(22px, 5vw, 40px);
+   margin-bottom: 40px;
+   font-family: var(--font-header);
 }
 
 .welcome-detail {
   color: var(--dark-green);
   font-weight: 800;
-  text-shadow: 0px 0px 1px var(--text-color);
+  text-shadow: 0px 0px 1px var(--text-black);
 }
 
 .welcome-container {
   display: flex;
-  justify-content: end;
+  justify-content: center;  
 }
 
-.welcome-container img { /*from mobile*/
-  width: 75%;
-  max-width: 100%;
+.welcome-container img { 
+  width: 95%;
+  max-width: 60%;
+  margin-left: 35px;
 }
 
 /**** Description Call of action ****/
 .description-container {
   position: relative;
+  padding: 2%;
 }
 
 .description-cars {
   color: var(--dark-green);
   position: absolute;
   background-color: hsla(94, 22%, 29%, 0.155);
-  bottom: 0.8rem;
+  bottom: 1.5rem;
   padding: 1% 3%;
-  left: 20px;
-
-  
+  left: 0.8rem;
 }
 
 .description-cars li {
   list-style: none;
-  font-size: clamp(18px, 5vw, 20px);
+  font-size: clamp(12px, 5vw, 20px);
   line-height: 1.3em;
   font-weight: 600;
 }
@@ -127,48 +132,37 @@ nav li {
 }
 
 .description-container img {
-  width: clamp(150px, 50vw, 200px);
   margin-top: 10px;
+  width: 125px;
 }
-
-/* .upgrades-reviews-container {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-rows: 1fr auto;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.reviews {
-  grid-column: 2/3;
-  grid-row: 1/2;
-  background-color: hsla(94, 22%, 29%, 0.155);
-  padding: 10px;
-} */
 
 /**** Reviews ****/
-.reviews h2,
-.upgradeH2 {
+.reviews h2{
   margin-bottom: 0;
 }
 
 .reviews ul li {
-  line-height: 3em;
+  line-height: 2.5em;
   font-weight: 600;
+  font-style: italic;
 }
 
 /**** Upgrades ****/
+.upgradeH2 {
+  margin-bottom: 0;
+}
+
 .upgrades-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
-  background-color: white;
-  padding: 10px 5px;
+  background-color: var(--text-white);
+  margin-bottom: 30px;
 }
 
- .upgrades-container h2 {
-   grid-column: span 2;
- }
+.upgrades-container h2 {
+  grid-column: span 2;
+}
 
 .upgrades-container p {
   display: flex;
@@ -176,9 +170,10 @@ nav li {
   align-items: center;
   justify-content: center;
   background-color: var(--dark-green);
-  box-shadow: 0 0 5PX var(--text-color);
+  box-shadow: 0 0 5PX var(--text-black);
   padding: 10px;
   text-align: center;
+  margin-bottom: -20px;
 }
 
 .upgrades-container img {
@@ -189,9 +184,9 @@ nav li {
 
 .upgrades-container a {
   text-decoration: none;
-  color: white;
+  color: var(--text-white);
   font-weight: bold;
-  border: 1px solid white;
+  border: 1px solid var(--text-white);
   padding: 3%;
   margin: 3%;
   border-radius: 5px;
@@ -201,23 +196,40 @@ nav li {
   display: block;
 }
 
+/**** Footer  ****/
+footer p {
+  font-weight: 800;
+  color: var(--dark-green);
+  margin-block: 20px;
+  padding-top: 10px;
+}
+
 /**** Large View ****/
 @media (min-width: 1024px) {
-  body {
+
+  /**** Background ****/
+  .bg-checker {
     background-image: url('/images/site/small_check.jpg');
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left;
-
-  }
-  main, #wrapper, footer{
-    /* width: 60em; */
+    width: 70em;
     margin-inline: auto;
-    background-color: white;
-    margin-block: 0;
+    padding-block: 25px
+  }
+  
+  /**** Header ****/
+  main, #wrapper, footer{
+    margin-inline: auto;
+    background-color: var(--text-white);
     padding: 2% 1%;
-    /* border: 1px solid var(--dark-green); */
+    border-left: 20px solid var(--dark-green);
+    border-right: 20px solid var(--dark-green);
+  }
+
+  #wrapper {
+    border-top: 20px solid var(--dark-green);
   }
 
   .tools a {
@@ -236,7 +248,10 @@ nav li {
   /**** Welcome information ****/
   .welcome-container {
     justify-content: center;
-    padding-bottom: 50px;
+  }
+
+  .welcome-msg {
+    margin-top: -40px;
   }
 
   /**** Description Call of action ****/
@@ -250,94 +265,61 @@ nav li {
     padding: 3%;
   }
 
+  .description-container img {
+    width: 200px;
+  }
+
   /**** Grid container (Upgrades/Reviews) ****/
-    .upgrades-reviews-container {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      grid-template-rows: 1fr auto;
-      gap: 20px;
-      margin-top: 20px;
-    }
-  
-    .reviews {
-      grid-column: 2/3;
-      grid-row: 1/2;
-      background-color: hsla(94, 22%, 29%, 0.155);
-      padding: 10px;
-    }
+  .upgrades-reviews-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 1fr auto;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .upgrades-container p {
+    margin-bottom: 0;
+  }
+
+  .reviews {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    background-color: hsla(94, 22%, 29%, 0.155);
+    padding: 10px;
+  }
+
   .reviews h2 {
     margin-left: 5px;
+    margin-top: 20px;
+  }
+
+  .reviews ul li {
+    line-height: 3em;
+    padding-left: 0;
+    padding-right: 5px;
   }
 
   /**** Upgrades ****/
   .upgrades-container {
     grid-column: 1/2;
     grid-row: 1/2;
+    margin-bottom: 0px;
   }
 
   .upgrades-container h2 {
     margin-bottom: 0;
+    text-align: center;
   }
 
+  /**** Footer ****/
   footer {
     background-color: var(--dark-green);
-    color: white;
-  }
-}
-
-
-
-/**** Mobile View ***/
-@media screen and (max-width: 600px) {
-  /**** Header ****/
-  /* .tools a {
-    margin-top: 10px;
-  } */
-
-  /**** Navigation ****/
-  /* nav li {
-    padding-block: 4%;
-  } */
-
-  /**** Welcome information ****/
-  /* .welcome-container {
-    justify-content: end;
-  } */
-
-  /* .welcome-container img {
-    width: 75%;
-    max-width: 100%;
-  } */
-
-  /**** Description Call of action ****/
-  /* .description-cars {
-    bottom: 0.8rem;
-    padding: 1% 3%;
-    left: 20px;
-  }   */
-
-  /* .description-cars li {
-    font-weight: 600;
-  } */
-
-  /**** Reviews ****/
-  /* .upgrades-reviews-container {
-    display: block;
-  } */
-
-  /* .reviews h2, .upgradeH2 {
-    margin-bottom: 0;
-  } */
-
-  /**** Upgrades ****/
-  .upgrades-container p {
-    margin-bottom: -20px;
   }
 
   footer p {
-    font-weight: 800;
-    color: var(--dark-green);
-    margin-block: 20px;
-    padding-top: 10px;
+    color: var(--text-white);
   }
 }
+
+
