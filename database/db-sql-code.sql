@@ -1,8 +1,8 @@
 CREATE TYPE public.account_type AS ENUM
-    ('Client', 'Employee', 'Adimn');
+    ('Client', 'Employee', 'Admin');
 
 ALTER TYPE public.account_type
-    OWNER TO cse340;
+    OWNER TO car_site_db; --same as the database name
 
 -- Table structure for table `classification`
 CREATE TABLE public.classification (
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS public.inventory(
 );  
 
 -- Create relationship between `classification` and `invertory` tables
-ALTER TABLE IF NOT EXISTS public.inventory
+ALTER TABLE IF EXISTS public.inventory
 	ADD CONSTRAINT fk_classification FOREIGN KEY (classification_id)
     REFERENCES public.classification (classification_id) MATCH SIMPLE
     ON UPDATE CASCADE
@@ -233,4 +233,13 @@ VALUES   (
   );
 
  
+-- 4-The description update SQL statement works.
+Update public.inventory
+set inv_description = replace(inv_description, 'small interiors', 'a huge interior')
+where inv_make = 'GM' and inv_model = 'Hummer';
 
+-- 6-The inv_image and inv_thumbnail update query works
+update public.inventory
+set inv_image = replace(inv_image, '/images/', '/images/vehicles/'),
+inv_thumbnail = replace(inv_thumbnail, '/images/', '/images/vehicles/')
+where inv_image like '/images/%' or inv_thumbnail like '/images/%';

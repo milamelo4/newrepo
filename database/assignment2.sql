@@ -22,3 +22,9 @@ from public.inventory as inv
 inner join public.classification as cla 
 on inv.classification_id = cla.classification_id
 where cla.classification_name = 'Sport';
+
+-- 6-The inv_image and inv_thumbnail update query works
+update public.inventory
+set inv_image = replace(inv_image, '/images/', '/images/vehicles/'),
+inv_thumbnail = replace(inv_thumbnail, '/images/', '/images/vehicles/')
+where inv_image like '/images/%' or inv_thumbnail like '/images/%';
