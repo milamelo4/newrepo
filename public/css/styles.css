@@ -12,6 +12,7 @@
   --lighter-blue: hsl(203, 65%, 58%);
   --blue-green: hsl(186, 36%, 48%);
   --dark-green: hsl(94, 22%, 29%);
+  --light-green: hsl(97, 42%, 94%);
   --text-black: hsl(0, 0%, 0%);
   --text-white: hsl(0, 0%, 100%);
 
@@ -210,6 +211,38 @@ footer p {
   padding-top: 10px;
 }
 
+/**** Inventory Page ****/
+hr {
+  display: none;
+}
+
+.inv-ul {
+  list-style: none;
+  padding: 0;
+ 
+}
+
+.inv-ul li {
+  background-color: var(--light-green);
+  padding: 20px;
+  margin-block: 20px;
+  box-shadow: 0px 0px 15px var(--dark-green);
+}
+
+.inv-ul li a{
+  color: var(--text-black);
+  
+}
+
+.namePrice {
+  
+  font-size: 20px;
+}
+
+.namePrice span {
+  font-size: 24px;
+}
+
 /**** Large View ****/
 @media (min-width: 1024px) {
 
@@ -326,6 +359,50 @@ footer p {
   footer p {
     color: var(--text-white);
   }
+
+  /**** Inventory Page ****/
+  .inv-ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    
+    
+  }
+
+  .inv-ul li {
+    margin-bottom: 0;
+  }
+
+  
+  .namePrice h2 a{
+    text-decoration: none;
+    font-size: 22px;
+  }
+
+  .namePrice span {
+    font-style: italic;
+    font-weight: 800;
+    color: var(--dark-green);
+    margin-bottom: 0;
+  }
+
+    .example_d {
+      
+      
+      background: #ffffff;
+      padding: 10px;
+      border: 3px solid var(--dark-green)!important;
+      border-radius: 6px;
+      display: inline-block;
+      transition: all 0.3s ease 0s;
+    }
+  
+    .example_d:hover {
+      color: var(--dark-green) !important;
+      border-radius: 50px;
+      border-color: var(--dark-green) !important;
+      transition: all 0.3s ease 0s;
+    }
 }
 
 

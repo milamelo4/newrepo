@@ -1,0 +1,12 @@
+<!-- Title Heading -->
+<% if (title) { %>
+    <h1 class="inv-title">
+        <%= title %>
+    </h1>
+<% } else { res.redirect('/') } %>
+
+<!-- Message block for displaying possible errors -->
+<%# messages() %>
+
+<!-- main content -->
+<%- grid %>
