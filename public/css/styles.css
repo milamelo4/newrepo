@@ -181,6 +181,7 @@ nav li a{
   padding: 10px;
   text-align: center;
   margin-bottom: -20px;
+  border-radius: 5px;
 }
 
 .upgrades-container img {
@@ -219,7 +220,6 @@ hr {
 .inv-ul {
   list-style: none;
   padding: 0;
- 
 }
 
 .inv-ul li {
@@ -232,16 +232,52 @@ hr {
 
 .inv-ul li a{
   color: var(--text-black);
-  
 }
 
 .namePrice {
-  
   font-size: 20px;
 }
 
 .namePrice span {
   font-size: 24px;
+}
+
+/**** Single View Inv ****/
+
+.grid-single-inv {
+  background-color: var(--dark-green);
+  color: white;
+  padding: 10px;
+}
+
+.full-img img{
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  box-shadow: 0 0 10px white;
+  
+} 
+
+.title-single-page {
+  font-size: clamp(24px, 5vw, 32px);
+}
+
+.single-desc {
+  font-size: clamp(22px, 5vw, 24px);
+  padding: 0 10px;
+  line-height: 1.5em;
+}
+
+.vehicle-price, .inv-color, .miles {
+  font-size: clamp(25px, 5vw, 20px);
+}
+
+.desc-list {
+  list-style: none;
+  margin-block: 15px;
+  padding-left: 0;
+  margin-left: 10px;
+  line-height: 2.8em;
 }
 
 /**** Large View ****/
@@ -283,6 +319,19 @@ hr {
 
   nav li {
     padding-block: 2%;
+  }
+  nav li a {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    padding: 10px;
+    transition: all 0.3s ease 0s;
+  }
+  nav li a:hover {
+    border-bottom: 2px solid var(--text-white);
+    border-top: 2px solid var(--text-white);
+    padding: 10px;
+    transition: all 0.3s ease 0s;
+    border-radius: 10px;
   }
 
   /**** Welcome information ****/
@@ -366,15 +415,15 @@ hr {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
-    
-    
   }
 
   .inv-ul li {
     margin-bottom: 0;
   }
 
-  
+  .inv-title, .title-single-page {
+    margin-top: -20px;
+  }
   .namePrice h2 a{
     text-decoration: none;
     font-size: 22px;
@@ -387,23 +436,24 @@ hr {
     margin-bottom: 0;
   }
 
-    .example_d {
-      
-      
-      background: #ffffff;
-      padding: 10px;
-      border: 3px solid var(--dark-green)!important;
-      border-radius: 6px;
-      display: inline-block;
-      transition: all 0.3s ease 0s;
-    }
-  
-    .example_d:hover {
-      color: var(--dark-green) !important;
-      border-radius: 50px;
-      border-color: var(--dark-green) !important;
-      transition: all 0.3s ease 0s;
-    }
+  .example_d {
+    background: var(--text-white);
+    padding: 10px;
+    border-bottom: 2px solid transparent;
+    border-top: 2px solid transparent;
+    border-radius: 10px;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+  }
+
+  .example_d:hover {
+    color: var(--dark-green);
+    border-radius: 10px;
+    border-top: 2px solid var(--dark-green);
+    border-bottom: 2px solid var(--dark-green);
+    border-color: var(--dark-green);
+    transition: all 0.3s ease 0s;
+  }
 }
 
 

@@ -19,4 +19,23 @@ invCont.buildByClassificationId = async function (req, res, next) {
   });
 };
 
+/* ***************************
+ *  Build Single inventory by classification
+ * ************************** */
+invCont.buildSingleClassification = async function (req, res, next) {
+  const inv_id = req.params.inventoryId;
+  const data = await invModel.getInventoryByInvId(inv_id);
+  const classMake = data[0].inv_make
+  const classModel = data[0].inv_model
+  const classYear = data[0].inv_year
+  const grid = await utilities.buildSingleClassification(data);
+  let nav = await utilities.getNav();
+  res.render("./inventory/vehicle", {
+    title: `${classYear} ${classMake} ${classModel} vehicle`,
+    nav,
+    grid,
+  });
+};
+
+
 module.exports = invCont;

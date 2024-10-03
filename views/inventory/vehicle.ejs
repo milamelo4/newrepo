@@ -1,0 +1,12 @@
+<!-- Title Heading -->
+<% if (title) { %>
+    <h1 class="title-single-page">
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+    <!-- Message block for displaying possible errors -->
+    <%# messages() %>
+
+    <!-- main content -->
+    <div class="grid-single-inv"><%- grid %></div>
