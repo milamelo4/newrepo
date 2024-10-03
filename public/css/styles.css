@@ -227,6 +227,7 @@ hr {
   padding: 20px;
   margin-block: 20px;
   box-shadow: 0px 0px 15px var(--dark-green);
+  border-radius: 5px;
 }
 
 .inv-ul li a{
@@ -324,7 +325,7 @@ hr {
   .reviews {
     grid-column: 2/3;
     grid-row: 1/2;
-    background-color: hsla(94, 22%, 29%, 0.155);
+    background-color: var(--light-green);
     padding: 10px;
   }
 
