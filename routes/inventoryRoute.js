@@ -9,11 +9,7 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 
 router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildSingleClassification));
 
-// Error trigger
-router.get("/trigger-error", (req, res, next) => {
-  const error = new Error("Intentional 500 error triggered!");
-  error.status = 500; // Set the status to 500
-  next(error); // Pass the error to the next middleware
-});
+// Error 500
+router.get("/trigger-error", utilities.handleErrors(invController.buildError))
 
 module.exports = router;

@@ -38,7 +38,7 @@ Util.buildClassificationGrid = async function(data){
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
       + 'details"><img src="' + vehicle.inv_thumbnail 
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a>'
+      +' on CSE Motors"></a>'
       grid += '<div class="namePrice">'      
       grid += '<h2 class="button_cont">'
       grid +=
@@ -56,7 +56,7 @@ Util.buildClassificationGrid = async function(data){
       grid += '</h2>'
       grid += '<span>$' 
       + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
-      grid += "<hr />"
+      grid += "<hr>"
       grid += '</div>'
       grid += '</li>'
     })
@@ -71,39 +71,42 @@ Util.buildClassificationGrid = async function(data){
 * Build the single classification grid
 * ************************************ */
 Util.buildSingleClassification = async function (data) {
-  let grid = "";
-  if (data.length > 0) {
-    grid = `<div class="inv-single-display">`
-    data.forEach((vehicle) => {
-      grid += `
-        <div class="desc-img">
-          <p class="single-desc">${vehicle.inv_description}</p>
-          <div class="full-img">
-            <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${
-        vehicle.inv_model
-      } on CSE Motors">
-          </div>
-          <ul class="desc-list">
+ let grid = "";
+if (data.length > 0) {
+ 
+  data.forEach((vehicle) => {
+    grid += `
+      <div class="img-desc">
+        <p class="single-desc">${vehicle.inv_description}</p>
+        <div class="full-img">
+          <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${
+      vehicle.inv_model
+    } on CSE Motors">
+        </div>
+      </div>
+      <div class="inventory-container">
+        <ul class="desc-ul">
           <li class="vehicle-price"><strong>Price:</strong> $${new Intl.NumberFormat(
             "en-US"
           ).format(vehicle.inv_price)}</li>
-          <li class= "miles"><strong>Mileage:</strong> ${new Intl.NumberFormat(
+          <li class="miles"><strong>Mileage:</strong> ${new Intl.NumberFormat(
             "en-US"
           ).format(vehicle.inv_miles)}</li>
           <li class="inv-color"><strong>Color:</strong> ${
             vehicle.inv_color
           }</li>
-          </ul>
-        </div>
-      `;
-    });
-    grid += `</div>`
-  } else {
-    grid = `<p class="notice">Sorry, no matching vehicles could be found.</p>`
-  }
+        </ul>
+        <p class="call-today">Call us TODAY!</p>
+      </div>
+    `;
+  });
+  
+} else {
+  grid = `<p class="notice">Sorry, no matching vehicles could be found.</p>`;
+}
 
-  return grid
-};
+return grid;
+}
 
 /* ****************************************
  * Middleware For Handling Errors

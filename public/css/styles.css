@@ -39,7 +39,6 @@ footer {
   width: 62em;
   margin-block: 0;
   padding: 0;
-  /* margin-inline: 5px; */
 }
 
 .siteName a {
@@ -82,6 +81,7 @@ nav li {
   font-size: 20px;
   padding-block: 4%; 
 }
+
 nav li a{
   color: var(--text-white);
   text-decoration: none;
@@ -108,7 +108,6 @@ nav li a{
 .welcome-container img { 
   width: 95%;
   max-width: 60%;
-  
 }
 
 /**** Description Call of action ****/
@@ -124,6 +123,7 @@ nav li a{
   bottom: -1.5rem;
   padding: 1% 3%;
   left: 0.8rem;
+  border-radius: 10px;
 }
 
 .description-cars li {
@@ -177,7 +177,7 @@ nav li a{
   align-items: center;
   justify-content: center;
   background-color: var(--dark-green);
-  box-shadow: 0 0 5PX var(--text-black);
+  box-shadow: 0 0 5PX var(--darker-blue);
   padding: 10px;
   text-align: center;
   margin-bottom: -20px;
@@ -226,7 +226,7 @@ hr {
   background-color: var(--light-green);
   padding: 20px;
   margin-block: 20px;
-  box-shadow: 0px 0px 15px var(--dark-green);
+  box-shadow: 0px 0px 15px var(--darker-blue);
   border-radius: 5px;
 }
 
@@ -243,41 +243,41 @@ hr {
 }
 
 /**** Single View Inv ****/
-
-.grid-single-inv {
+.sg-view-container{
   background-color: var(--dark-green);
-  color: white;
-  padding: 10px;
+  color: var(--text-white);
+  padding: 10px 5px;
+}
+
+.title-single-page {
+  font-size: 24px;
+  padding:  0 10px;
 }
 
 .full-img img{
   width: 100%;
   max-width: 100%;
   display: block;
-  box-shadow: 0 0 10px white;
-  
+ 
+  margin-top: 15px;
 } 
 
-.title-single-page {
-  font-size: clamp(24px, 5vw, 32px);
+.img-desc p{
+  font-size: clamp(20px, 5vw, 18px);
+  padding: 10px;
+  /* margin-block: 10px; */
 }
 
-.single-desc {
-  font-size: clamp(22px, 5vw, 24px);
-  padding: 0 10px;
-  line-height: 1.5em;
+.call-today {
+  padding-left: 10px;
 }
 
-.vehicle-price, .inv-color, .miles {
-  font-size: clamp(25px, 5vw, 20px);
-}
-
-.desc-list {
+.desc-ul{
+  font-size: clamp(20px, 5vw, 20px);
   list-style: none;
-  margin-block: 15px;
   padding-left: 0;
   margin-left: 10px;
-  line-height: 2.8em;
+  line-height: 1.7em;
 }
 
 /**** Large View ****/
@@ -376,6 +376,7 @@ hr {
     grid-row: 1/2;
     background-color: var(--light-green);
     padding: 10px;
+    border-radius: 10px;
   }
 
   .reviews h2 {
@@ -406,7 +407,7 @@ hr {
     background-color: var(--dark-green);
   }
 
-  footer p {
+  footer p, a {
     color: var(--text-white);
   }
 
@@ -421,9 +422,9 @@ hr {
     margin-bottom: 0;
   }
 
-  .inv-title, .title-single-page {
+  /* .inv-title, .title-single-page {
     margin-top: -20px;
-  }
+  } */
   .namePrice h2 a{
     text-decoration: none;
     font-size: 22px;
@@ -454,6 +455,68 @@ hr {
     border-color: var(--dark-green);
     transition: all 0.3s ease 0s;
   }
+
+  /**** Single View Inv ****/
+  .sg-view-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    /* border-top: 5px solid var(--dark-green);
+    border-bottom: 2px solid var(--dark-green); */
+    border-radius: 5px;
+    gap: 20px;
+    background-color: var(--light-green);
+    box-shadow: 0 0 20px var(--darker-blue);
+  }
+
+  .full-img img, .single-desc {
+    grid-column: 1/1;
+    grid-row: 1/1;
+  }
+  .single-desc {
+    line-height: 1.8em;
+  }
+  .full-img img {
+    box-shadow: none;
+  }
+
+  .img-desc {
+    background-color: var(--dark-green);
+    padding: 10px;
+  }
+
+  .img-desc p {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .inventory-container {
+    grid-column: 2/2;
+    grid-row: 1/1;
+    color: var(--text-black);
+    align-content: center;
+  }
+  
+  .title-single-page {
+    grid-column: 2/2;
+    grid-row: 1/1;
+    color: var(--dark-green);
+    font-family: var(--font-header);
+    font-size: 28px;
+  }
+
+  .desc-ul {
+    margin-top: -20px;
+  }
+
+  .call-today {
+    font-style: italic;
+    font-family: var(--font-header);
+    font-size: 26px;
+    color: var(--dark-green);
+    font-weight: 800;
+  }
+
 }
 
 

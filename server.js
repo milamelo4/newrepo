@@ -27,21 +27,17 @@ app.set("layout", "./layouts/layout") // not at views root
 app.use(static)
 
 // Index routes 
-// "get" object, within the HTTP Request, for a particular route.
 app.get("/", utilities.handleErrors(baseController.buildHome));
 
 // Inventory routes
-app.use("/inv", utilities.handleErrors(inventoryRoute))
+app.use("/inv", inventoryRoute)
 
 // File Not Found Route - MUST BE last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
 
-// 500 Test error
-app.use(async (req, res, next) => {
-  next({ status: 500, message: "500" });
-});
+
 
 /* ***********************
 * Express Error Handler

@@ -37,5 +37,13 @@ invCont.buildSingleClassification = async function (req, res, next) {
   });
 };
 
+/* ***************************
+ *  Build error controller
+ * ************************** */
+invCont.buildError = async function (req, res, next) {
+  const error = new Error("Intentional 500 error!");
+  error.status = 500;
+  next(error);
+}
 
 module.exports = invCont;

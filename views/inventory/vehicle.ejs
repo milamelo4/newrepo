@@ -1,12 +1,15 @@
 <!-- Title Heading -->
 <% if (title) { %>
-    <h1 class="title-single-page">
-        <%= title %>
-    </h1>
-<% } else { res.redirect('/') } %>
+    <div class="sg-view-container">
+        <h1 class="title-single-page">
+            <%= title %>
+        </h1>
 
-    <!-- Message block for displaying possible errors -->
-    <%# messages() %>
+        <!-- Message block for displaying possible errors -->
+        <%# messages() %>
 
-    <!-- main content -->
-    <div class="grid-single-inv"><%- grid %></div>
+        <!-- main content -->
+        <%- grid %>
+    </div>
+    
+    <% } %>
