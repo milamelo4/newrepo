@@ -69,8 +69,8 @@ app.use(async (err, req, res, next) => {
  * Local Server Information
  * Values from .env (environment) file
  *************************/
-const port = process.env.PORT || 3000; // Default to 3000 if PORT is undefined
-const host = process.env.HOST || '0.0.0.0'; // Default to '0.0.0.0' in production
+const port = process.env.PORT
+const host = process.env.HOST
 
 /* ***********************
  * Log statement to confirm server operation
