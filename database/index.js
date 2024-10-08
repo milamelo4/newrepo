@@ -36,12 +36,3 @@ if (process.env.NODE_ENV == "development") {
   module.exports = pool;
 }
 
-// let pool;
-
-// pool = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: {
-//     rejectUnauthorized: false, // Ensures SSL is used without rejecting self-signed certificates
-//   },
-// });
-
