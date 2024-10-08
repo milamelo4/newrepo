@@ -249,7 +249,7 @@ hr {
   padding: 10px 5px;
 }
 
-.title-single-page {
+.title-single-page, .title-login {
   font-size: 24px;
   padding:  0 10px;
 }
@@ -279,6 +279,9 @@ hr {
   margin-left: 10px;
   line-height: 1.7em;
 }
+
+/**** Login Form ****/
+
 
 /**** Large View ****/
 @media (min-width: 1024px) {

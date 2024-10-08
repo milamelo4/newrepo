@@ -1,0 +1,25 @@
+<h1 class="title-login">
+    <%= title %>
+</h1>
+
+<!-- Display Flash msg -->
+<% if (flashMessage) { %>
+    <div class="flash-message">
+        <%= flashMessage %>
+    </div>
+    <% } %>
+
+    <!-- Login Form -->
+    <form action="/login" method="POST" class="login-form">
+        <label for="account_email">Email Address:</label>
+        <input type="email" id="account_email" name="account_email" required>
+    
+        <label for="account_password">Password:</label>
+        <input type="password" id="account_password" name="account_password"
+            required>
+    
+        <button type="submit">Login</button>
+    </form>
+    <!-- Registration Link -->
+    <p>Don't have an account? <a href="/account/register">Register here</a></p> <!-- refer client back to register form -->
+    
