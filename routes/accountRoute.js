@@ -10,4 +10,10 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 // Route to build account registration
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
+// Route to handle account registration form (POST request)
+router.post(
+  "/register",
+  utilities.handleErrors(accountController.registerAccount)
+);
+
 module.exports = router;
