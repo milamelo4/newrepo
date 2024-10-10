@@ -56,8 +56,9 @@ footer {
 
 .tools a {
   text-decoration: none;
-  color: var(--text-black);
-  margin-top: 10px; /*from mobile */
+  color: var(--dark-green);
+  margin-top: 10px; 
+  font-weight: 600;
 }
 
  /**** Navigation ****/
@@ -281,23 +282,30 @@ hr {
 }
 
 /**** Login Form ****/
+
 .title-login, .title-register {
-  margin-left: 20px;
+  color: var(--dark-green);
+  padding-left: 10px;
+  font-size: 30px;
 }
+
+
 .login-form, .register-form {
   display: block;
   background-color: var(--dark-green);
   color: var(--text-white);
-  width: 90%;
+  width: 100%;
+  max-width: 100%;
   padding: 20px;
-  font-size: 13px;
+  font-size: 18px;
   margin-inline: auto;
+  box-shadow: none;
 
 }
 
 .login-form label, .register-form label {
-
-  padding: 0.7em 0 0.4em;
+  font-size: 18px;
+  padding: 0.7em 0 0.4em 0.4em;
   display: inline-block;
 }
 
@@ -307,18 +315,18 @@ hr {
 }
 
 .login-form input, .register-form input {
-  padding: 0.5em;
+  padding: 1em;
   width: 100%;
-  border-radius: 5px;
-}
-.red-star {
-  color: var(--bright-blue);
+  border-radius: 10px;
+  border: none;
+  caret-color: var(--dark-green);
+  
 }
 
 .login-btn , .register-btn {
-  width: 50%;
+  width: 100%;
   margin-top: 15px;
-  padding: 2.5% 0;
+  padding: 3% 0;
   border-radius: 10px;
   background-color: var(--light-green);
   border: none;
@@ -335,27 +343,27 @@ hr {
   font-size: 18px;
 }
 
+.pass-req span{
+  display: block;
+  margin-top: 10px;
+  
+}
+
 /**** Registration Form ****/
-.checkbox-container >* {
-  display: flex;
-  align-items: start;
-  justify-content: left;
-  justify-items: left;
-}
-.checkbox-container input[type="checkbox"] {
-  margin-left: -50px;
-  align-self: left;
+
+.input-wrapper input:required:invalid,
+.input-wrapper input:focus:invalid {
+  appearance: none;
+  border: 1px solid #900;
+  background-color: rgb(252, 235, 235);
 }
 
-input:required:invalid,
-input:focus:invalid {
-  border: 1px solid red;
+.input-wrapper input:focus:required:valid {
+  appearance: none;
+  box-shadow: 0 0 10px var(--text-white);
+  background-color: var(--light-green);
+  border: none;
 }
-
-input:required:valid {
-  border: 1px solid blue;
-}
-
 /**** Large View ****/
 @media (min-width: 1024px) {
 
@@ -549,9 +557,11 @@ input:required:valid {
     grid-column: 1/1;
     grid-row: 1/1;
   }
+
   .single-desc {
     line-height: 1.8em;
   }
+
   .full-img img {
     box-shadow: none;
   }
@@ -593,6 +603,67 @@ input:required:valid {
     font-weight: 800;
   }
 
+  /**** Forms ****/
+  .form-container {
+    width: 40em;
+  }
+  .login-form, .register-form {
+    padding: 10%;
+  }
+  
+
+  .new-account a {
+    color: var(--text-black);
+  }
+
+  .form-container {
+    margin-inline: auto;
+    display: block;
+  }
+
+  .title-login,
+  .title-register {
+    font-size: 32px;
+    margin-top: 0;
+    color: var(--dark-green);
+  }
+  .tools a {
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-radius: 5px;
+    padding: 10px;
+    transition: all 0.3s ease;
+  }
+  .tools a:hover {
+    border-top: 2px solid var(--dark-green);
+    border-bottom: 2px solid var(--dark-green);
+    border-radius: 5px;
+  }
+
+  .login-btn, .register-btn {
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  .login-btn:hover, .register-btn:hover {
+    background-color: var(--dark-green);
+    color: var(--text-white);
+    border-top: 2px solid var(--text-white);
+    border-bottom: 2px solid var(--text-white);
+
+  } 
+
+  .new-account a {
+    font-weight: 400;
+    transition: all 0.3s ease;
+  }
+  .new-account a:hover {
+    color: var(--dark-green);
+    font-weight: 600;
+  }
 }
+
+
 
 
