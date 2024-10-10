@@ -40,6 +40,21 @@ invCont.buildSingleClassification = async function (req, res, next) {
 };
 
 /* ***************************
+ *  Build Management inventory view
+ * ************************** */
+invCont.buildManagement = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const classificationList = await utilities.buildClassificationList()
+  res.render("./inventory/management", {
+    title: "Management",
+    nav,
+    classificationList,
+    error: null,
+  })
+}
+
+
+/* ***************************
  *  Build error controller
  * ************************** */
 invCont.buildError = async function (req, res, next) {

@@ -9,6 +9,10 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 
 router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildSingleClassification));
 
+// Route to build the management view
+// "/" acts as the main entry point for the router’s route, typically handling requests to the base path where the router is mounted.
+router.get("/", utilities.handleErrors(invController.buildManagement));
+
 // Error 500
 router.get("/trigger-error", utilities.handleErrors(invController.buildError))
 

@@ -1,3 +1,4 @@
+const utils = require("pg/lib/utils");
 const invModel = require("../models/inventory-model");
 const Util = {};
 
@@ -64,6 +65,7 @@ Util.buildClassificationGrid = async function(data){
   } else { 
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
+  
   return grid
 }
 
@@ -107,6 +109,31 @@ if (data.length > 0) {
 
 return grid;
 }
+
+/* **************************************
+* Build the management grid
+* ************************************ */
+
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications();
+  // console.log("Data from getClassifications:", data); // Debugging
+  // console.log("Rows from getClassifications:", data.rows); // Debugging
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>';
+  classificationList += "<option value=''>Choose a Classification</option>";
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"';
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected ";
+    }
+    classificationList += ">" + row.classification_name + "</option>";
+  });
+  classificationList += "</select>";
+  return classificationList;
+};
 
 /* ****************************************
  * Middleware For Handling Errors

@@ -1,0 +1,19 @@
+<!-- Title Heading -->
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+<!-- Display Flash msg -->
+<!-- Display Flash msg -->
+<%- messages() %>
+
+<div class="management-container">
+    <a href="/inv/add-classification">Add New Classification</a>
+    <a href="/inv/new-inventory">Add New Vehicle</a>
+</div>
+<form>
+    <label for="classificationList">Choose Classification:</label>
+    <%- classificationList %> <!-- Renders the dropdown -->
+</form>
