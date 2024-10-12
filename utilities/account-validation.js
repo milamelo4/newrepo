@@ -6,7 +6,7 @@ const accountModel = require("../models/account-model");
 /*  **********************************
   *  Registration Data Validation Rules
   * ********************************* */
-  validate.registationRules = () => {
+  validate.registrationRules = () => {
     return [
       // firstname is required and must be string
       body("account_firstname")
@@ -132,4 +132,5 @@ if (!errors.isEmpty()) {
 }
 next();
 };
+
 module.exports = validate

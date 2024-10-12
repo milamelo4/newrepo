@@ -39,20 +39,6 @@ invCont.buildSingleClassification = async function (req, res, next) {
   });
 };
 
-/* ***************************
- *  Build Management inventory view
- * ************************** */
-invCont.buildManagement = async function (req, res, next) {
-  let nav = await utilities.getNav();
-  const classificationList = await utilities.buildClassificationList()
-  res.render("./inventory/management", {
-    title: "Management",
-    nav,
-    classificationList,
-    error: null,
-  })
-}
-
 
 /* ***************************
  *  Build error controller
@@ -62,5 +48,143 @@ invCont.buildError = async function (req, res, next) {
   error.status = 500;
   next(error);
 }
+
+
+/* ***************************
+ *  Build Management inventory view
+ * ************************** */
+invCont.buildManagement = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const classificationList = await utilities.buildClassificationList();
+  res.render("./inventory/management", {
+    title: "Management",
+    nav,
+    classificationList,
+    error: null,
+  });
+};
+
+/* ***************************
+ *  Build Add Classification view
+ * ************************** */
+invCont.buildAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("./inventory/add-classification", {
+    title: "Add New Classification",
+    nav,
+    errors: null,
+  });
+}
+
+invCont.addClassification = async function (req, res, next) {
+  const { classificationName } = req.body;
+
+  try {
+    const insertResult = await invModel.newClassification(classificationName);
+    if (insertResult) {
+      const newClassificationId = insertResult.id;
+
+      // Return JSON if it's an AJAX request
+      if (req.xhr || req.headers.accept.includes("json")) {
+        return res.json({
+          success: true,
+          message: `Added new classification: ${classificationName}`,
+          newClassificationId,
+          newClassificationName: classificationName,
+        });
+      } else {
+        req.flash("notice", `Added new classification: ${classificationName}`);
+        return res.redirect("/inv");
+      }
+    } else {
+      return res
+        .status(500)
+        .json({ success: false, message: "Error adding classification." });
+    }
+  } catch (error) {
+    console.error("Error adding classification:", error);
+    if (req.xhr || req.headers.accept.includes("json")) {
+      return res
+        .status(500)
+        .json({
+          success: false,
+          message: "Unexpected error occurred while adding classification.",
+        });
+    } else {
+      req.flash(
+        "notice",
+        "Unexpected error occurred while adding classification."
+      );
+      return res.redirect("/inv/add-classification");
+    }
+  }
+};
+
+
+
+invCont.buildAddVehicle = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const classificationList = await utilities.buildClassificationList();
+  res.render("./inventory/add-inventory", {
+    title: "Add New Vehicle",
+    nav,
+    classificationList,
+    errors: null,
+  });
+} 
+
+/* ***************************
+ *  Build Add Inventory view
+ * ************************** */
+invCont.addInventory = async function (req, res, next) {
+  const {
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_price,
+    inv_miles,
+    inv_color,
+    inv_year,
+    inv_thumbnail,
+    classification_id,
+  } = req.body;
+  let nav = await utilities.getNav();
+ 
+  const insertResult = await invModel.newInventory(
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_price,
+    inv_miles,
+    inv_color,
+    inv_year,
+    inv_thumbnail,
+    classification_id
+  );
+
+  if (insertResult) {
+    req.flash("notice", `Added new vehicle: ${inv_make} ${inv_model}`);
+  
+    const classificationList = await utilities.buildClassificationList();
+    res.status(201).render("./inventory/management", {
+      title: "Management",
+      nav,
+      classificationList,
+      error: null,
+    })
+  } else {
+    req.flash("notice", `Error adding new vehicle: ${inv_make} ${inv_model}`);
+    let classificationList = await utilities.buildClassificationList();
+    res.status(501).render("./inventory/add-inventory", {
+      title: "Add New Vehicle",
+      nav,
+      errors: null,
+      classificationList,
+    
+    })
+  }
+}   
 
 module.exports = invCont;

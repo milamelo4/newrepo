@@ -144,8 +144,3 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 
 module.exports = Util;
 
-// Single Item Returned
-// [objectName.rows[0] - (e.g. accountData.rows[0]), will provide access to the single object in the rows array.
-
-// Multiple Items Returned
-// [objectName].rows - (e.g. classificationData.rows.foreach(.....))

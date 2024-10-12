@@ -364,6 +364,14 @@ hr {
   background-color: var(--light-green);
   border: none;
 }
+
+.management-container a{
+  color: var(--text-black);
+}
+
+.add-inventory-form *{
+  display: block;
+}
 /**** Large View ****/
 @media (min-width: 1024px) {
 

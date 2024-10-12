@@ -1,0 +1,34 @@
+<!-- Title Heading -->
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+<!-- Display Flash msg -->
+<%- messages() %>
+
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error=> { %>
+                <li>
+                    <%= error.msg %>
+                </li>
+                <% }) %>
+        </ul>
+        <% } %>
+
+<form id="classificationForm" action="/inv/add-classification" method="POST">
+    <label for="classificationName">New Classification Name:</label>
+    <input type="text" id="classificationName" name="classificationName"
+        required  pattern="^[a-zA-Z0-9]+$" >
+
+    <!-- Client-side validation message -->
+    <small>Note: The classification name cannot contain spaces or special
+        characters.</small>
+
+        
+
+    <button type="submit" id="submitBtn">Add Classification</button>
+</form>
+
