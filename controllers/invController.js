@@ -76,47 +76,25 @@ invCont.buildAddClassification = async function (req, res, next) {
   });
 }
 
-invCont.addClassification = async function (req, res, next) {
-  const { classificationName } = req.body;
-
-  try {
-    const insertResult = await invModel.newClassification(classificationName);
-    if (insertResult) {
-      const newClassificationId = insertResult.id;
-
-      // Return JSON if it's an AJAX request
-      if (req.xhr || req.headers.accept.includes("json")) {
-        return res.json({
-          success: true,
-          message: `Added new classification: ${classificationName}`,
-          newClassificationId,
-          newClassificationName: classificationName,
-        });
-      } else {
-        req.flash("notice", `Added new classification: ${classificationName}`);
-        return res.redirect("/inv");
-      }
-    } else {
-      return res
-        .status(500)
-        .json({ success: false, message: "Error adding classification." });
-    }
-  } catch (error) {
-    console.error("Error adding classification:", error);
-    if (req.xhr || req.headers.accept.includes("json")) {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: "Unexpected error occurred while adding classification.",
-        });
-    } else {
-      req.flash(
-        "notice",
-        "Unexpected error occurred while adding classification."
-      );
-      return res.redirect("/inv/add-classification");
-    }
+invCont.addClassification = async function (req, res) {
+  const { classification_name } = req.body;
+  const classResult = await invModel.newClassification(classification_name);
+  const options = await utilities.buildClassificationList();
+  let nav = await utilities.getNav();
+  if (classResult) {
+    req.flash("notice", `Congratulations, you added ${classification_name}!`);
+    res.status(201).render("./inventory/management", {
+      title: "Management",
+      nav,
+      options,
+    });
+  } else {
+    req.flash("notice", "Sorry, the new classification wasn't entered.");
+    res.status(501).render("./inventory/add-classification", {
+      title: "Enter new classification",
+      nav,
+      errors: null,
+    });
   }
 };
 

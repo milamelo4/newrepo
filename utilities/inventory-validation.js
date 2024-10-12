@@ -1,26 +1,38 @@
 const utilities = require(".")
 const { body, validationResult } = require("express-validator")
 const validate = {}
-// const inventoryModel = require("../models/inventory-model")
+const invModel = require("../models/inventory-model")
 
 /* ******************************
 * Classification name validation rules
 * ***************************** */
 validate.classificationRules = () => {
   return [
-    body("classificationName")
+    body("classification_name")
       .trim()
       .escape()
       .notEmpty()
+      .isLength({ min: 3, max: 16 })
       .matches(/^[a-zA-Z0-9]+$/)
       .withMessage(
         "Please provide a valid classification name without spaces or special characters."
-      ),
+      )
+      .custom(async (classification_name) => {
+        // Check if the classification already exists
+        const existingClassification = await invModel.findClassificationByName(
+          classification_name
+        );
+        if (existingClassification) {
+          throw new Error(
+            "Classification name already exists. Please enter a unique name."
+          );
+        }
+      }),
   ];
-}
+};
 
 validate.checkClassData = async (req, res, next) => {
-  const { classificationName } = req.body
+  const { classification_name } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -29,7 +41,7 @@ validate.checkClassData = async (req, res, next) => {
       errors,
       title: "Add Classification",
       nav,
-      classificationName,
+      classification_name,
     })
     return
   }

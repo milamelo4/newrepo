@@ -46,10 +46,10 @@ async function getInventoryByInvId(inv_id) {
   }
 }
 
-async function newClassification(classificationName) {
+async function newClassification(classification_name) {
   try {
     const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *";
-    const result = await pool.query(sql, [classificationName]);
+    const result = await pool.query(sql, [classification_name]);
     return result.rowCount > 0; // True if insertion was successful
   } catch (error) {
     console.error("Database error:", error);
@@ -67,10 +67,25 @@ async function newInventory(inv_color, inv_make, inv_model, inv_description, inv
   
 }
 
+/* ***************************
+ *  Classification by classification_name validation procedure
+ * ************************** */
+async function findClassificationByName(classification_name) {
+  try {
+    const sql = "SELECT * FROM classification WHERE classification_name = $1";
+    const result = await pool.query(sql, [classification_name]);
+    return result.rowCount > 0; // Returns true if a matching classification is found
+  } catch (error) {
+    console.error("findClassificationByName error:", error);
+    throw error;
+  }
+}
+
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
   getInventoryByInvId,
   newClassification, 
-  newInventory
+  newInventory,
+  findClassificationByName
 };
