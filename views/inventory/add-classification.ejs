@@ -1,34 +1,36 @@
-<!-- Title Heading -->
-<% if (title) { %>
-    <h1>
-        <%= title %>
-    </h1>
-    <% } else { res.redirect('/') } %>
-
-<!-- Display Flash msg -->
-<%- messages() %>
-
-    <% if (errors) { %>
-        <ul class="notice">
-            <% errors.array().forEach(error=> { %>
-                <li>
-                    <%= error.msg %>
-                </li>
-                <% }) %>
-        </ul>
-        <% } %>
-
-<form id="classificationForm" action="/inv/add-classification" method="POST">
-    <label for="classification_name">New Classification Name:</label>
-    <input type="text" id="classification_name" name="classification_name"
-        required  pattern="^[a-zA-Z0-9]+$" >
-
-    <!-- Client-side validation message -->
-    <small>Note: The classification name cannot contain spaces or special
-        characters.</small>
-
-        
-
-    <button type="submit" id="submitBtn">Add Classification</button>
-</form>
+<div class="form-container">
+    <!-- Title Heading -->
+    <% if (title) { %>
+        <h1 class="add-classification-title">
+            <%= title %>
+        </h1>
+        <% } else { res.redirect('/') } %>
+    
+    <!-- Display Flash msg -->
+    <%- messages() %>
+    
+        <% if (errors) { %>
+            <ul class="notice">
+                <% errors.array().forEach(error=> { %>
+                    <li>
+                        <%= error.msg %>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } %>
+    
+    <form id="classificationForm" action="/inv/add-classification" method="POST" class="classification-form">
+        <div class="input-wrapper">
+            <label for="classification_name">New Classification Name:</label>
+            <input type="text" id="classification_name" name="classification_name"
+                required pattern="^[a-zA-Z0-9]+$" >
+        </div>
+    
+        <!-- Client-side validation message -->
+        <small>Note: The classification name cannot contain spaces or special
+            characters.</small>
+    
+        <button type="submit" id="submitBtn" class="classification-btn">Add Classification</button>
+    </form>
+</div>
 

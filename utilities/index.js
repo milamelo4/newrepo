@@ -79,7 +79,9 @@ if (data.length > 0) {
   data.forEach((vehicle) => {
     grid += `
       <div class="img-desc">
-        <p class="single-desc">${vehicle.inv_description}</p>
+        <div id="test-desc">
+          <p class="single-desc">${vehicle.inv_description}</p>
+        </div>
         <div class="full-img">
           <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${
       vehicle.inv_model
@@ -119,7 +121,7 @@ Util.buildClassificationList = async function (classification_id = null) {
   // console.log("Data from getClassifications:", data); // Debugging
   // console.log("Rows from getClassifications:", data.rows); // Debugging
   let classificationList =
-    '<select name="classification_id" id="classificationList" required>';
+    '<select name="classification_id" id="classification_id" required>';
   classificationList += "<option value=''>Choose a Classification</option>";
   data.rows.forEach((row) => {
     classificationList += '<option value="' + row.classification_id + '"';

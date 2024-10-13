@@ -68,14 +68,26 @@ validate.vehicleRules = () => {
         "Please provide a valid vehicle model without spaces or special characters."
       ),
 
+    // vehicle year is required
+    body("inv_year")
+      .trim()
+      .notEmpty()
+      .isLength({ min: 4, max: 4 })
+      .withMessage(
+        "Please provide a valid vehicle year without spaces or special characters."
+      ),
+
     //vehicle description is required
     body("inv_description")
       .trim()
       .notEmpty()
       .isLength({ min: 20 })
+      .escape()
       .withMessage(
         "Please provide a valid vehicle description without spaces or special characters."
-      ),
+      )
+      .customSanitizer(value => value.trim())
+      .customSanitizer(value => value.replace(/[^\x20-\x7E\n\r]/g, "")), // removes control characters but keeps new lines
 
     //vehicle image is required
     body("inv_image")
@@ -84,6 +96,15 @@ validate.vehicleRules = () => {
       .isLength({ min: 3 })
       .withMessage("Please provide a valid vehicle image."),
 
+    // vehicle thumbnail is required
+    body("inv_thumbnail")
+      .trim()
+      .notEmpty()
+      .isLength({ min: 3 })
+      .withMessage(
+        "Please provide a valid vehicle thumbnail without spaces or special characters."
+      ),
+      
     //vehicle price is required
     body("inv_price")
       .trim()
@@ -109,24 +130,6 @@ validate.vehicleRules = () => {
       .isLength({ min: 3 })
       .withMessage(
         "Please provide a valid vehicle color without spaces or special characters."
-      ),
-
-    // vehicle year is required
-    body("inv_year")
-      .trim()
-      .notEmpty()
-      .isInt({ min: 1900, max: new Date().getFullYear() })
-      .withMessage(
-        "Please provide a valid vehicle year without spaces or special characters."
-      ),
-
-    // vehicle thumbnail is required
-    body("inv_thumbnail")
-      .trim()
-      .notEmpty()
-      .isLength({ min: 3 })
-      .withMessage(
-        "Please provide a valid vehicle thumbnail without spaces or special characters."
       ),
   ];
 }
