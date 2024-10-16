@@ -94,9 +94,9 @@ validate.checkRegData = async (req, res, next) => {
           const emailExists = await accountModel.checkExistingEmail(
             account_email
           );
-          if (emailExists) {
+          if (!emailExists) {
             throw new Error(
-              "Email exists. Please log in or use different email"
+              "Email does not match. Please log using an existing account or register with a different email"
             );
           }
         }),

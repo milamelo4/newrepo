@@ -243,3 +243,12 @@ update public.inventory
 set inv_image = replace(inv_image, '/images/', '/images/vehicles/'),
 inv_thumbnail = replace(inv_thumbnail, '/images/', '/images/vehicles/')
 where inv_image like '/images/%' or inv_thumbnail like '/images/%';
+
+-- account_type of the Employee account to "Employee".
+update account
+set account_type = 'Admin'
+where account_id = 20;
+
+update account
+set account_type = 'Employee'
+where account_id = 19
