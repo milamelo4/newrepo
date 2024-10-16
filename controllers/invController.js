@@ -60,7 +60,7 @@ invCont.buildManagement = async function (req, res, next) {
     title: "Management",
     nav,
     classificationList,
-    error: null,
+    errors: null,
   });
 };
 

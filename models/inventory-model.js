@@ -94,7 +94,8 @@ async function newInventory(
  * ************************** */
 async function findClassificationByName(classification_name) {
   try {
-    const sql = "SELECT * FROM classification WHERE classification_name = $1";
+    const sql =
+      "SELECT * FROM classification WHERE LOWER(classification_name) = LOWER($1)";
     const result = await pool.query(sql, [classification_name]);
     return result.rowCount > 0; // Returns true if a matching classification is found
   } catch (error) {
@@ -102,6 +103,7 @@ async function findClassificationByName(classification_name) {
     throw error;
   }
 }
+
 
 module.exports = {
   getClassifications,

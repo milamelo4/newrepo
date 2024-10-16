@@ -23,57 +23,111 @@
         action="/inv/add-inventory" method="POST">
         <fieldset>
             <legend>New Inventory Form</legend>
-        <label for="classification_id">Choose a classification:</label>
-            <%- classificationList %>
-    
         <div class="input-wrapper">
-            <label for="inv_make">Make:</label>
-            <input type="text" id="inv_make" name="inv_make" required placeholder="Enter Car Make" value="<%= locals.inv_make %>">
+            <label for="classification_id">Choose a classification*</label>
+                <%- classificationList %>
         </div>
     
         <div class="input-wrapper">
-            <label for="inv_model">Model:</label>
-            <input type="text" id="inv_model" name="inv_model" required placeholder="Enter Car Model" value="<%= locals.inv_model %>">
+            <label for="inv_make">Make*</label>
+            <input type="text" 
+            id="inv_make" 
+            name="inv_make" 
+            pattern="^[a-zA-Z0-9]{3,}$"
+            title="Make must be at least 3 characters no space" 
+            required 
+            placeholder="Enter Car Make" 
+            value="<%= locals.inv_make %>">
         </div>
     
         <div class="input-wrapper">
-            <label for="inv_year">Year:</label>
-            <input type="text" id="inv_year" name="inv_year" required pattern="\d{4}" placeholder="Enter Car Year" value="<%= locals.inv_year %>">
+            <label for="inv_model">Model*</label>
+            <input type="text" 
+            id="inv_model" 
+            name="inv_model"
+            title="Model must be at least 3 characters no space" 
+            required 
+            placeholder="Enter Car Model" 
+            value="<%= locals.inv_model %>">
+        </div>
+    
+        <div class="input-wrapper">
+            <label for="inv_year">Year*</label>
+            <input type="text" 
+            id="inv_year" 
+            name="inv_year" 
+            required 
+            pattern="\d{4}" 
+            title="Year must be 4 digits"
+            placeholder="Enter Car Year" 
+            value="<%= locals.inv_year %>">
         </div>
     
         <div class="input-wrapper testDesc">
-            <label for="inv_description">Description</label>
+            <label for="inv_description">Description*</label>
             <textarea id="inv_description"
                 placeholder="Enter description, use at least 20 characters"
-                name="inv_description" rows="5" cols="33" required><%-
-                    locals.inv_description %></textarea>
+                title="Description must be at least 20 characters"
+                name="inv_description" rows="5" cols="33" minlength="20" 
+                required><%- locals.inv_description %></textarea>
         </div>
     
         <div class="input-wrapper .no-image">
-            <label for="inv_image">Image:</label>
-            <input type="text" id="inv_image" required name="inv_image"
-                placeholder="/images/vehicles/no-image.png" value="<%= locals.inv_image %>">
+            <label for="inv_image">Image*</label>
+            <input type="text" 
+            id="inv_image" 
+            required 
+            name="inv_image"
+            title="Image must be at least 3 characters no space"
+            placeholder="/images/vehicles/no-image.png" 
+            value="<%= locals.inv_image %>">
         </div>
     
         <div class="input-wrapper">
-            <label for="inv_thumbnail">Thumbnail:</label>
-            <input type="text" id="inv_thumbnail" required name="inv_thumbnail"
-                placeholder="/images/vehicles/no-image-tn.png" value="<%= locals.inv_thumbnail %>">
+            <label for="inv_thumbnail">Thumbnail*</label>
+            <input type="text" 
+            id="inv_thumbnail" 
+            required 
+            name="inv_thumbnail"
+            title="Thumbnail must be at least 3 characters no space"    
+            placeholder="/images/vehicles/no-image-tn.png" 
+            value="<%= locals.inv_thumbnail %>">
         </div>
     
         <div class="input-wrapper">
-            <label for="inv_price">Price:</label>
-            <input type="number" id="inv_price" name="inv_price" required placeholder="Enter Car Price" value="<%= locals.inv_price %>">
+            <label for="inv_price">Price*</label>
+            <input type="number" 
+            id="inv_price" 
+            name="inv_price" 
+            required 
+            min="3"
+            title="Price must be at least 3 digits no space"
+            placeholder="Enter Car Price" 
+            value="<%= locals.inv_price %>">
         </div>
     
         <div class="input-wrapper">
-            <label for="inv_miles">Miles:</label>
-            <input type="number" id="inv_miles" name="inv_miles" required placeholder="Enter Car Miles" value="<%= locals.inv_miles %>">
+            <label for="inv_miles">Miles*</label>
+            <input type="number" 
+            id="inv_miles" 
+            name="inv_miles" 
+            required 
+            min="3"
+            title="Miles must be at least 3 digits no space"
+            placeholder="Enter Car Miles" 
+            value="<%= locals.inv_miles %>">
         </div>
     
         <div class="input-wrapper">
-            <label for="inv_color">Color:</label>
-            <input type="text" id="inv_color" name="inv_color" required placeholder="Choose Car Color" value="<%= locals.inv_color %>">
+            <label for="inv_color">Color*</label>
+            <input type="text" 
+            id="inv_color" 
+            name="inv_color" 
+            required 
+            pattern="^[a-zA-Z0-9]{3,}$"
+            title="Color must be at least 3 characters no space"
+            placeholder="Choose Car Color" 
+            value="<%= locals.inv_color %>">
         </div>
     
         <input type="submit" id="submitBtn" value="Enter New Vehicle" class="inventory-btn">

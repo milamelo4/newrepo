@@ -375,23 +375,34 @@ hr {
   margin-top: 10px;
 }
 
+
 /**** Validations Form ****/
 
 .input-wrapper input:required:invalid,
 .input-wrapper input:focus:invalid,
 .input-wrapper textarea:required:invalid,
-.input-wrapper textarea:focus:invalid {
+.input-wrapper textarea:focus:invalid,
+select:focus:invalid {
   appearance: none;
   border: 1px solid #900;
   background-color: rgb(252, 235, 235);
 }
 
 .input-wrapper input:focus:required:valid,
-.input-wrapper textarea:focus:required:valid {
+.input-wrapper textarea:focus:required:valid,
+select:focus:required:valid {
   appearance: none;
   box-shadow: 0 0 10px var(--text-white);
   background-color: var(--light-green);
   border: none;
+}
+
+select:valid {
+  background-color: var(--light-green);
+}
+
+select option[value=""] {
+  background-color: rgb(252, 235, 235);
 }
 
 /**** Management View****/

@@ -118,24 +118,21 @@ return grid;
 
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications();
-  // console.log("Data from getClassifications:", data); // Debugging
-  // console.log("Rows from getClassifications:", data.rows); // Debugging
   let classificationList =
-    '<select name="classification_id" id="classification_id" required>';
+    '<select name="classification_id" id="classification_id" required class="form-dropdown">';
   classificationList += "<option value=''>Choose a Classification</option>";
+
   data.rows.forEach((row) => {
-    classificationList += '<option value="' + row.classification_id + '"';
-    if (
-      classification_id != null &&
-      row.classification_id == classification_id
-    ) {
-      classificationList += " selected ";
-    }
-    classificationList += ">" + row.classification_name + "</option>";
+    classificationList += `<option value="${row.classification_id}" ${
+      row.classification_id === Number(classification_id) ? "selected" : ""
+    }>`;
+    classificationList += `${row.classification_name}</option>`;
   });
+
   classificationList += "</select>";
   return classificationList;
 };
+
 
 /* ****************************************
  * Middleware For Handling Errors

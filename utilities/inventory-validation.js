@@ -12,10 +12,14 @@ validate.classificationRules = () => {
       .trim()
       .escape()
       .notEmpty()
-      .isLength({ min: 3, max: 16 })
+      .withMessage("Classification name is required.")
+      .bail() // stop on first error
+      .isLength({ min: 3 })
+      .withMessage("Classification name must be at least 3 characters.")
+      .bail()
       .matches(/^[a-zA-Z0-9]+$/)
       .withMessage(
-        "Please provide a valid classification name without spaces or special characters."
+        "Classification name is required and must be without spaces or special characters."
       )
       .custom(async (classification_name) => {
         // Check if the classification already exists
@@ -50,86 +54,78 @@ validate.checkClassData = async (req, res, next) => {
 
 validate.vehicleRules = () => {
   return [
+    // Classification (required dropdown selection)
+    body("classification_id")
+      .notEmpty()
+      .withMessage("Please choose a classification."),
+
     // vehicle name is required
     body("inv_make")
       .trim()
-      .notEmpty()
       .isLength({ min: 3 })
+      .matches(/^[a-zA-Z0-9]{3,}$/)
       .withMessage(
-        "Please provide a valid vehicle name without spaces or special characters."
+        "Vehicle name is required and must be at least 3 characters long without spaces or special characters."
       ),
 
     //vehicle model is required
     body("inv_model")
       .trim()
-      .notEmpty()
       .isLength({ min: 3 })
+      .matches(/^[a-zA-Z0-9]{3,}$/)
       .withMessage(
-        "Please provide a valid vehicle model without spaces or special characters."
+        "Vehicle model is required and must be at least 3 characters long without spaces or special characters."
       ),
 
     // vehicle year is required
     body("inv_year")
       .trim()
-      .notEmpty()
-      .isLength({ min: 4, max: 4 })
+      .matches(/^\d{4}$/)
       .withMessage(
-        "Please provide a valid vehicle year without spaces or special characters."
+        "Vehicle year is required and must be a 4-digit number, e.g., 2024."
       ),
 
     //vehicle description is required
     body("inv_description")
       .trim()
-      .notEmpty()
       .isLength({ min: 20 })
       .escape()
       .withMessage(
-        "Please provide a valid vehicle description without spaces or special characters."
-      )
-      .customSanitizer(value => value.trim())
-      .customSanitizer(value => value.replace(/[^\x20-\x7E\n\r]/g, "")), // removes control characters but keeps new lines
+        "Vehicle description is required and must be at least 20 characters long."
+      ),
+    // .customSanitizer((value) => value.trim())
+    // .customSanitizer((value) => value.replace(/[^\x20-\x7E\n\r]/g, "")), // removes control characters but keeps new lines
 
     //vehicle image is required
     body("inv_image")
       .trim()
-      .notEmpty()
       .isLength({ min: 3 })
-      .withMessage("Please provide a valid vehicle image."),
+      .withMessage("Image path must be at least 3 characters long."),
 
     // vehicle thumbnail is required
     body("inv_thumbnail")
       .trim()
-      .notEmpty()
       .isLength({ min: 3 })
-      .withMessage(
-        "Please provide a valid vehicle thumbnail without spaces or special characters."
-      ),
-      
+      .withMessage("Image path must be at least 3 characters long."),
+
     //vehicle price is required
     body("inv_price")
       .trim()
-      .notEmpty()
       .isInt({ min: 1, max: 1000000000 })
-      .withMessage(
-        "Please provide a valid vehicle price without spaces or special characters."
-      ),
+      .withMessage("Vehicle price is required and must be a positive number."),
 
     // vehicle miles is required
     body("inv_miles")
       .trim()
-      .notEmpty()
       .isInt({ min: 1, max: 1000000000 })
-      .withMessage(
-        "Please provide a valid vehicle miles without spaces or special characters."
-      ),
+      .withMessage("Vehicle miles is required and must be a positive number."),
 
     // vehicle color is required
     body("inv_color")
       .trim()
-      .notEmpty()
       .isLength({ min: 3 })
       .withMessage(
-        "Please provide a valid vehicle color without spaces or special characters."
+        "Vehicle color is required and must be at least 3 characters long."
       ),
   ];
 }
@@ -144,15 +140,15 @@ validate.checkVehicleData = async (req, res, next) => {
     inv_color,
     inv_year,
     inv_thumbnail,
-    classificationId,
+    classification_id,
   } = req.body;
   let errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
     let classificationList = await utilities.buildClassificationList(
-      classificationId
-    ); // Pass classificationId to make dropdown sticky
+      classification_id
+    ); // Pass classification_id to make dropdown sticky
 
     res.render("inventory/add-inventory", {
       errors,
@@ -168,7 +164,7 @@ validate.checkVehicleData = async (req, res, next) => {
       inv_year,
       inv_thumbnail,
       classificationList,
-      classificationId,
+      classification_id,
     });
     return;
   }
