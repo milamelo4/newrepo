@@ -20,6 +20,12 @@ router.get("/trigger-error", utilities.handleErrors(invController.buildError))
 // Route to build the add classification view
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
 
+// Route to build the add vehicle view
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
+);
+
 // Process classification name attempt
 router.post(
   "/add-classification",

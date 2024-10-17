@@ -425,6 +425,29 @@ select option[value=""] {
   margin-inline: auto;
 }
 
+/****** Inventory Display For Editing *****/
+
+.inventory-display {
+  width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1em;
+}
+.inventory-display th, td {
+  background-color: var(--dark-green);
+    /* Green background */
+    color: white;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.inventoryDisplay tr:hover {
+  background-color: #ddd;
+}
+
+
+
 
 /**** Large View ****/
 @media (min-width: 1024px) {
