@@ -52,6 +52,9 @@ validate.checkClassData = async (req, res, next) => {
   next()
 }
 
+/* ******************************
+* Inventory name validation rules
+* ***************************** */
 validate.vehicleRules = () => {
   return [
     // Classification (required dropdown selection)
@@ -62,19 +65,19 @@ validate.vehicleRules = () => {
     // vehicle name is required
     body("inv_make")
       .trim()
-      .isLength({ min: 3 })
-      .matches(/^[a-zA-Z0-9]{3,}$/)
+      .isLength({ min: 2 })
+      .matches(/^[a-zA-Z0-9\s]{2,}$/)
       .withMessage(
-        "Vehicle name is required and must be at least 3 characters long without spaces or special characters."
+        "Vehicle name is required and must be at least 2 characters long without special characters."
       ),
 
     //vehicle model is required
     body("inv_model")
       .trim()
-      .isLength({ min: 3 })
-      .matches(/^[a-zA-Z0-9]{3,}$/)
+      .isLength({ min: 2 })
+      .matches(/^[a-zA-Z0-9\s]{2,}$/)
       .withMessage(
-        "Vehicle model is required and must be at least 3 characters long without spaces or special characters."
+        "Vehicle model is required and must be at least 2 characters long without special characters."
       ),
 
     // vehicle year is required
@@ -171,4 +174,50 @@ validate.checkVehicleData = async (req, res, next) => {
   next();
 };
 
+/* ******************************
+* Inventory name validation rules
+* ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_description,
+    inv_image,
+    inv_price,
+    inv_miles,
+    inv_color,
+    inv_year,
+    inv_thumbnail,
+    classification_id,
+  } = req.body;
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    let classificationList = await utilities.buildClassificationList(
+      classification_id
+    ); // Pass classification_id to make dropdown sticky
+
+    res.render("inventory/edit-inventory", {
+      errors: errors.array(),
+      title: "Edit Inventory",
+      nav,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_price,
+      inv_miles,
+      inv_color,
+      inv_year,
+      inv_thumbnail,
+      classificationList,
+      classification_id,
+    });
+    return;
+  }
+  next();
+};
 module.exports = validate

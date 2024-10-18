@@ -45,5 +45,24 @@ router.post(
   utilities.handleErrors(invController.addInventory)
 );
 
+// Route to build the edit vehicle view
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
+
+router.post(
+  "/update/",
+  regValidate.vehicleRules(),
+  regValidate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory)
+);
+
+// Route to build the delete vehicle view
+router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteInventoryView));
+
+router.post(
+  "/delete/",
+  // regValidate.vehicleRules(),
+  // regValidate.checkUpdateData,
+  utilities.handleErrors(invController.deleteInventory)
+);
 
 module.exports = router;

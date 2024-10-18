@@ -20,9 +20,9 @@
                     <% } %>
     
     <form id="inventoryForm" class="inventory-form"
-        action="/inv/add-inventory" method="POST">
+        action="/inv/update" method="POST">
         <fieldset>
-            <legend>New Inventory Form</legend>
+            <legend>Edit Inventory</legend>
         <div class="input-wrapper">
             <label for="classification_id">Choose a classification*</label>
                 <%- classificationList %>
@@ -70,7 +70,7 @@
                 placeholder="Enter description, use at least 20 characters"
                 title="Description must be at least 20 characters"
                 name="inv_description" rows="5" cols="33" minlength="20" 
-                required><%- locals.inv_description %></textarea>
+                required><%= locals.inv_description %></textarea>
         </div>
     
         <div class="input-wrapper .no-image">
@@ -131,8 +131,12 @@
             value="<%= locals.inv_color %>">
         </div>
     
-        <input type="submit" id="submitBtn" value="Enter New Vehicle" class="inventory-btn">
+        <input type="submit" id="submitBtn" value="Edit Vehicle" class="inventory-btn" name="submit">
+        <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%=
+            locals.inv_id %>"
+            <% } %>>
     
     </fieldset>
     </form>
 </div>
+<script src="../../inv-update.js"></script>

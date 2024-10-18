@@ -1,0 +1,87 @@
+<div class="form-container">
+    <!-- Title Heading -->
+    <% if (title) { %>
+        <h1 class="add-inventory-title">
+            <%= title %>
+        </h1>
+        <% } else { res.redirect('/') } %>
+    
+            <!-- Display Flash msg -->
+            <%- messages() %>
+    
+                <% if (errors) { %>
+                    <ul class="notice">
+                        <% errors.array().forEach(error=> { %>
+                            <li>
+                                <%= error.msg %>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <% } %>
+    
+    <form id="inventoryForm" class="inventory-form"
+        action="/inv/delete" method="POST">
+        <fieldset>
+            <legend>Delete Inventory</legend>
+      
+        <div class="input-wrapper">
+            <label for="inv_make">Make*</label>
+            <input type="text" 
+            id="inv_make" 
+            name="inv_make" 
+            pattern="^[a-zA-Z0-9\s]{2,}$"
+            title="Make must be at least 2 characters" 
+            readonly
+            required 
+            placeholder="Enter Car Make" 
+            value="<%= locals.inv_make %>">
+        </div>
+    
+        <div class="input-wrapper">
+            <label for="inv_model">Model*</label>
+            <input type="text" 
+            id="inv_model" 
+            name="inv_model"
+            readonly
+            pattern="^[a-zA-Z0-9\s]{2,}$"
+            title="Model must be at least 2 characters" 
+            required 
+            placeholder="Enter Car Model" 
+            value="<%= locals.inv_model %>">
+        </div>
+    
+        <div class="input-wrapper">
+            <label for="inv_year">Year*</label>
+            <input type="text" 
+            id="inv_year" 
+            name="inv_year" 
+            required 
+            readonly
+            pattern="\d{4}" 
+            title="Year must be 4 digits"
+            placeholder="Enter Car Year" 
+            value="<%= locals.inv_year %>">
+        </div>
+    
+        <div class="input-wrapper">
+            <label for="inv_price">Price*</label>
+            <input type="number" 
+            id="inv_price" 
+            name="inv_price" 
+            required 
+            readonly
+            min="3"
+            title="Price must be at least 3 digits no space"
+            placeholder="Enter Car Price" 
+            value="<%= locals.inv_price %>">
+        </div>
+    
+        <input type="submit" id="submitBtn" value="Delete Vehicle" class="inventory-btn" name="submit">
+        <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%=
+            locals.inv_id %>"
+            <% } %>>
+        <p>Confirm Deletion - The delete is permanent.</p>
+    
+    </fieldset>
+    </form>
+</div>
