@@ -5,6 +5,7 @@ const accountModel = require("../models/account-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const accountController = {};
 
 /* ***************************
  *  Account Controller
@@ -131,7 +132,90 @@ async function buildAccountManagement(req, res) {
     title: "Account Management",
     nav,
     errors: null,
+    accountData: res.locals.accountData,
   });
+}
+
+// logout account 
+async function logoutAccount(req, res) {
+  res.clearCookie("jwt")
+  req.flash("notice", "You have successfully logged out.")
+  res.redirect("/account/login");
+}
+
+// Build Update Account View
+async function buildUpdateAccount(req, res) {
+  let nav = await utilities.getNav();
+  res.render("account/update-account", {
+    title: "Manage Account",
+    nav,
+    errors: null,
+    
+  });
+}
+// update account
+async function updateAccount(req, res) {
+  let nav = await utilities.getNav();
+  const { 
+    account_firstname, 
+    account_lastname, 
+    account_email, account_id 
+  } = req.body;
+  console.log("account_id:" + account_id);
+
+  try {
+    // Update the account details in the database
+    const updResult = await accountModel.updateAccount(
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id
+    );
+
+    if (updResult) {
+      req.flash("notice", "Congratulations, you updated the account!");
+
+      // Create a new JWT token with updated data
+      const accountToken = await accountModel.getAccountByEmail(account_email);
+      delete accountToken.account_password;
+      const token = jwt.sign(accountToken, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: 3600 * 1000,
+      });
+
+      // Set the JWT cookie
+      const cookieOptions = {
+        httpOnly: true,
+        maxAge: 3600 * 1000,
+      };
+      if (process.env.NODE_ENV !== "development") {
+        cookieOptions.secure = true;
+      }
+      res.cookie("jwt", token, cookieOptions);
+
+      // Render the account management page with updated data
+      res.render("account/management", {
+        title: "Account Management",
+        nav,
+        errors: null,
+      });
+    } else {
+      // If update fails, flash an error and re-render the update form
+      req.flash("notice", "Sorry, the account update failed.");
+      res.status(501).render("account/update-account", {
+        title: "Edit Account",
+        nav,
+        errors: null,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    req.flash("notice", "An error occurred while updating the account.");
+    res.status(500).render("account/update-account", {
+      title: "Edit Account",
+      nav,
+      errors: [{ msg: "Internal server error. Please try again later." }],
+    });
+  }
 }
 
 module.exports = {
@@ -140,4 +224,7 @@ module.exports = {
   registerAccount,
   accountLogin,
   buildAccountManagement,
+  logoutAccount,
+  updateAccount,
+  buildUpdateAccount,
 };

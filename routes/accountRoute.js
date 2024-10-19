@@ -14,8 +14,13 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 // Route to handle account management
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
 
-
+// Route to handle account logout
+router.get("/logout", utilities.handleErrors(accountController.logoutAccount));
 // Route to handle account registration form (POST request)
+
+// Route to build the update form (without account_id in URL)
+router.get("/update", utilities.checkJWTToken, utilities.handleErrors(accountController.buildUpdateAccount));
+
 // Process the registration data
 router.post(
   "/register",
@@ -32,9 +37,12 @@ router.post(
   utilities.handleErrors(accountController.accountLogin)
 );
 
-// router.post(
-//   "/accountManagement",
-//   utilities.handleErrors(accountController.accountLogin)
-// );
+// Account update route
+router.post(
+  "/update",
+  // regValidate.registrationRules(),
+  // regValidate.checkRegData,
+  utilities.handleErrors(accountController.updateAccount)
+)
 
 module.exports = router;

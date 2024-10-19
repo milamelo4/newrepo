@@ -155,6 +155,8 @@ async function updateInventory(
   }
 }
 
+
+
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
@@ -163,5 +165,6 @@ module.exports = {
   newInventory,
   findClassificationByName,
   updateInventory,
-  deleteInventoryItem
+  deleteInventoryItem,
+  
 };

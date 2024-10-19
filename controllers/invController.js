@@ -79,14 +79,14 @@ invCont.buildAddClassification = async function (req, res, next) {
 invCont.addClassification = async function (req, res) {
   const { classification_name } = req.body;
   const classResult = await invModel.newClassification(classification_name);
-  const options = await utilities.buildClassificationList();
+  const classificationSelect = await utilities.buildClassificationList();
   let nav = await utilities.getNav();
   if (classResult) {
     req.flash("notice", `Congratulations, you added ${classification_name}!`);
     res.status(201).render("./inventory/management", {
       title: "Management",
       nav,
-      options,
+      classificationSelect,
     });
   } else {
     req.flash("notice", "Sorry, the new classification wasn't entered.");
@@ -319,32 +319,62 @@ invCont.deleteInventoryView = async function (req, res, next) {
 /* ***************************
  *  Update Inventory
  * ************************** */
+// invCont.deleteInventory = async function (req, res, next) {
+//   let nav = await utilities.getNav();
+//   const inv_id = parseInt(req.body.inv_id)
+
+//   const deleteResults = await invModel.deleteInventoryItem(
+//     inv_id  );
+//   console.log(deleteResults);
+
+//   if (deleteResults) {
+   
+//     req.flash("notice", `The item was successfully deleted.`);
+//     res.redirect("/inv/");
+//   } else {
+//     req.flash("notice", "Sorry, the insert failed.");
+//     res.status(501).render("inventory/delete/inv_id") 
+//   }
+// };
+
 invCont.deleteInventory = async function (req, res, next) {
   let nav = await utilities.getNav();
-  const { inv_id } = req.body;
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_price,
+    inv_year,
+  } = req.body;
+  const updateResult = await invModel.deleteInventoryItem(
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_price,
+    inv_year,
+  );
 
-  // Fetch inventory details before deletion
-  const itemDataArray = await invModel.getInventoryByInvId(inv_id);
-  const itemData = itemDataArray[0]; // First element from the fetched data
-
-  if (!itemData) {
-    req.flash("notice", "Item not found.");
-    return res.redirect("/inv/");
-  }
-
-  // Now delete the item
-  const deleteResults = await invModel.deleteInventoryItem(inv_id);
-
-  if (deleteResults.rowCount > 0) {
-    // If deletion was successful
-    const itemName = itemData.inv_make + " " + itemData.inv_model; // Use fetched data
-    req.flash("notice", `The ${itemName} was successfully deleted.`);
+  if (updateResult) {
+    const itemName = updateResult.inv_make + " " + updateResult.inv_model;
+    req.flash("notice", `The ${itemName} was successfully updated.`);
     res.redirect("/inv/");
   } else {
-    req.flash("notice", "Sorry, the delete failed.");
-    res.status(501).render("inventory/delete", { inv_id });
+    // const classificationSelect = await utilities.buildClassificationList(
+    //   classification_id
+    // );
+    const itemName = `${inv_make} ${inv_model}`;
+    req.flash("notice", "Sorry, the insert failed.");
+    res.status(501).render("inventory/edit-inventory", {
+      title: "Edit " + itemName,
+      nav,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_price,
+    });
   }
 };
-
 
 module.exports = invCont;
