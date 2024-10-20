@@ -15,17 +15,20 @@
     </ul>
     <% } %>
 
-<h2>Welcome <%= accountData.account_firstname %>
-</h2>
+<div class="acc-mgt-container">
+    <% if (accountData) { %>
+        <h2>Welcome <%= accountData.account_firstname %></h2>
+    <p>
+        <a href="/account/update"
+            class="edit-acc-btn">Edit Account Information</a>
+    </p>
+    <% if (accountData.account_type==='Employee' ||  accountData.account_type==='Admin' ) { %>
+        <h3>Inventory Management</h3>
+        <p><a href="/inv/" class="edit-acc-btn">Access Inventory Management</a></p>
+        <% } %>
 
-<!-- All users -->
-<a href="/account/update/<%= accountData.account_id %>">Update Account
-    Information</a>
-
-<!-- only admin and employee -->
-<% if (accountData.account_type==='Employee' ||
-    accountData.account_type==='Admin' ) { %>
-    <h3>Inventory Management</h3>
-    <p><a href="/inv/">Access Inventory Management</a></p>
-    <% } %>
+            <% } else { %>
+                <p>You are not logged in.</p>
+                <% } %>
+</div>
        

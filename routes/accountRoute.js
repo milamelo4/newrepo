@@ -12,14 +12,18 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
 // Route to handle account management
-router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement));
+router.get("/", 
+  utilities.handleErrors(utilities.checkLogin), 
+  utilities.handleErrors(accountController.buildAccountManagement));
 
 // Route to handle account logout
 router.get("/logout", utilities.handleErrors(accountController.logoutAccount));
 // Route to handle account registration form (POST request)
 
 // Route to build the update form (without account_id in URL)
-router.get("/update", utilities.checkJWTToken, utilities.handleErrors(accountController.buildUpdateAccount));
+router.get("/update", 
+  utilities.handleErrors(utilities.checkJWTToken), 
+  utilities.handleErrors(accountController.buildUpdateAccount));
 
 // Process the registration data
 router.post(
@@ -40,9 +44,17 @@ router.post(
 // Account update route
 router.post(
   "/update",
-  // regValidate.registrationRules(),
-  // regValidate.checkRegData,
+  regValidate.acctUpdateRules(),
+  regValidate.checkAccData,
   utilities.handleErrors(accountController.updateAccount)
-)
+);
+
+// Account change password route
+router.post(
+  "/change-password",
+  regValidate.passwordChangeRules(),
+  regValidate.checkPasswordChangeData,
+  utilities.handleErrors(accountController.changePassword)
+);
 
 module.exports = router;

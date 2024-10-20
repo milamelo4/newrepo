@@ -5,48 +5,49 @@
 
     <!-- Display Flash msg -->
     <%- messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error=> { %>
+                <li>
+                    <%= error.msg %>
+                </li>
+                <% }) %>
+        </ul>
+        <% } %>
 
-        <% if (errors) { %>
-            <ul class="notice">
-                <% errors.array().forEach(error=> { %>
-                    <li>
-                        <%= error.msg %>
-                    </li>
-                    <% }) %>
-            </ul>
-            <% } %>
 
     <form action="/account/update" method="POST" class="login-form">
-        <input type="hidden" name="account_id" value="<%= locals.accountData.account_id %>">
+        
         <fieldset>
             <legend>Account Update</legend>
 
             <div class="input-wrapper">
-                <label for="firstname">First Name:</label>
-                <input type="text" id="firstname" name="firstname"
+                <label for="account_firstname">First Name:</label>
+                <input type="text" id="account_firstname" name="account_firstname"
                     value="<%= locals.accountData.account_firstname %>"
                     required>
             </div>
 
             <div class="input-wrapper">
-                <label for="lastname">Last Name:</label>
-                <input type="text" id="lastname" name="lastname"
+                <label for="account_lastname">Last Name:</label>
+                <input type="text" id="account_lastname" name="account_lastname"
                     value="<%= locals.accountData.account_lastname %>"
                     required>
             </div>
 
             <div class="input-wrapper">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email"
+                <label for="account_email">Email:</label>
+                <input type="email" id="account_email" name="account_email"
                     value="<%= locals.accountData.account_email %>"
                     required>
             </div>
-
+            <input type="hidden" name="account_id"
+                value="<%= locals.accountData.account_id %>">
             <button type="submit" class="login-btn">Update Account</button>
         </fieldset>
     </form>
-    <hr>
-    <form action="/account/change-password" method="POST" class="login-form">
+    <hr class="hr">
+    <form action="/account/change-password" method="POST" class="login-form legend">
         <fieldset>
             <legend>Change Password</legend>
 
@@ -60,11 +61,12 @@
                 <input type="password" id="confirmPassword"
                     name="confirmPassword" required
                     pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-                <span>*Passwords must be at least 12 characters and contain at
+                <span class="pass-requ">*Passwords must be at least 12 characters and contain at
                     least 1 number, 1 capital letter, and 1 special
                     character.</span>
             </div>
-
+            <input type="hidden" name="account_id"
+                value="<%= locals.accountData.account_id %>">
             <button type="submit" class="login-btn">Change Password</button>
         </fieldset>
     </form>

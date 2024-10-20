@@ -179,24 +179,25 @@ Util.checkJWTToken = (req, res, next) => {
  }
 
  /* ****************************************
- *  Check Inventory Permissions (New Middleware)
+ *  Check Inventory Permissions ( Middleware)
  * ************************************ */
 Util.checkInventoryPermissions = (req, res, next) => {
-  //ensure user is logged in
-  if (res.locals.loggedin && res.locals.accountData) {
-    const accountType = res.locals.accountData.account_type
+  if (res.locals.loggedin) {
+    const accountType = res.locals.accountData.account_type;
+
     if (accountType === "Admin" || accountType === "Employee") {
-      return next()
-    } 
-    else {
-      req.flash(
-        "notice",
-        "You must be an employee or admin to grant permissions."
-      );
-     return res.redirect("/account/login")
+      return next(); 
+    } else {
+      req.flash("notice", "You do not have permission to access this page.");
+      return res.redirect("/account/"); 
     }
+  } else {
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login"); 
   }
-}
+};
+
+
 
 module.exports = Util;
 

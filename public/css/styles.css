@@ -353,7 +353,7 @@ hr {
 .inventory-btn {
   width: 100%;
   margin-top: 15px;
-  padding: 3% 0;
+  padding: 2% 0;
   border-radius: 10px;
   background-color: var(--light-green);
   border: none;
@@ -501,9 +501,17 @@ table {
     border-top: 20px solid var(--dark-green);
   }
 
-  .tools a {
-    align-self: center;
+  #top-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
+
+  .tools {
+    display: flex;
+    justify-content: end;
+  }
+  
+  
 
   /**** Navigation ****/
   nav {
@@ -726,6 +734,14 @@ table {
     width: 40em;
   }
 
+  legend {
+    text-align: center;
+  }
+
+  .hr{
+    display: block;
+  }
+
   .login-form, .register-form {
     padding: 10%;
   }
@@ -772,7 +788,8 @@ table {
   .login-btn a:hover, 
   .register-btn:hover,
   .classification-btn:hover,
-  .inventory-btn:hover {
+  .inventory-btn:hover,
+  .login-btn:hover {
     background-color: var(--dark-green);
     color: var(--text-white);
     border-top: 2px solid var(--text-white);
@@ -789,7 +806,27 @@ table {
     font-weight: 600;
   }
 
-}
+  .pass-requ {
+    font-size: 14px;
+  }
+
+  /****** Account Management ******/
+  .edit-acc-btn {
+    width: 100%;
+    border-radius: 10px;
+    background-color: var(--light-green);
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark-green);
+    }
+
+    .acc-mgt-container {
+      padding-left: 10px;
+    }
+    
+  }
+
 
 
 
