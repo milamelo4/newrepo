@@ -153,7 +153,7 @@ Util.checkJWTToken = (req, res, next) => {
    process.env.ACCESS_TOKEN_SECRET,
    function (err, accountData) {
     if (err) {
-     req.flash("Please log in")
+     req.flash("success", "Please log in")
      res.clearCookie("jwt")
      return res.redirect("/account/login")
     }
@@ -173,7 +173,7 @@ Util.checkJWTToken = (req, res, next) => {
   if (res.locals.loggedin) {
     next()
   } else {
-    req.flash("notice", "Please log in.")
+    req.flash("success", "Please log in.")
     return res.redirect("/account/login")
   }
  }
@@ -192,12 +192,10 @@ Util.checkInventoryPermissions = (req, res, next) => {
       return res.redirect("/account/"); 
     }
   } else {
-    req.flash("notice", "Please log in.");
+    req.flash("success", "Please log in.");
     return res.redirect("/account/login"); 
   }
 };
-
-
 
 module.exports = Util;
 

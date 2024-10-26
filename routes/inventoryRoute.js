@@ -22,18 +22,18 @@ router.get("/trigger-error", utilities.handleErrors(invController.buildError))
 // Route to build the add classification view
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
 
-// Route to build the add vehicle view
-router.get(
-  "/getInventory/:classification_id",
-  utilities.handleErrors(invController.getInventoryJSON)
-);
-
 // Process classification name attempt
 router.post(
   "/add-classification",
   regValidate.classificationRules(),
   regValidate.checkClassData,
   utilities.handleErrors(invController.addClassification)
+);
+
+// Route to build the add vehicle view
+router.get(
+  "/getInventory/:classification_id",
+  utilities.handleErrors(invController.getInventoryJSON)
 );
 
 // Route to build the add vehicle view
@@ -62,9 +62,10 @@ router.get("/delete/:inv_id", utilities.handleErrors(invController.deleteInvento
 
 router.post(
   "/delete/",
-  // regValidate.vehicleRules(),
-  // regValidate.checkUpdateData,
   utilities.handleErrors(invController.deleteInventory)
 );
+
+
+
 
 module.exports = router;

@@ -2,6 +2,7 @@ const utilities = require(".")
 const { body, validationResult } = require("express-validator")
 const validate = {}
 const invModel = require("../models/inventory-model")
+// const reviewModel = require("../models/review-model")
 
 /* ******************************
 * Classification name validation rules
@@ -96,8 +97,6 @@ validate.vehicleRules = () => {
       .withMessage(
         "Vehicle description is required and must be at least 20 characters long."
       ),
-    // .customSanitizer((value) => value.trim())
-    // .customSanitizer((value) => value.replace(/[^\x20-\x7E\n\r]/g, "")), // removes control characters but keeps new lines
 
     //vehicle image is required
     body("inv_image")
@@ -148,7 +147,7 @@ validate.checkVehicleData = async (req, res, next) => {
   let errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    let nav = await utilities.getNav();
+    let nav = await utilities.getNav();    
     let classificationList = await utilities.buildClassificationList(
       classification_id
     ); // Pass classification_id to make dropdown sticky

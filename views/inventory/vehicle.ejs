@@ -1,15 +1,103 @@
-<!-- Title Heading -->
+<!-- Reviews Section -->
 <% if (title) { %>
     <div class="sg-view-container">
         <h1 class="title-single-page">
             <%= title %>
         </h1>
 
-        <!-- Message block for displaying possible errors -->
-        <%# messages() %>
+<!-- Message block for displaying possible errors -->
+<div id="flash-message">
+    <%- messages() %>
+</div>
+    <% if (errors) { %>
+        <ul>
+            <% errors.array().forEach(error=> { %>
+                <li>
+                    <%= error.msg %>
+                </li>
+                <% }) %>
+        </ul>
+        <% } %>
 
-        <!-- main content -->
-        <%- grid %>
-    </div>
+    <!-- main content -->
+    <%- grid %>
+</div>
+
+    <!-- Reviews Section -->
+<div class="review-section">
+    <h2 class="secondary-title">Customer Reviews</h2>
+    <div class="review-container">
     
+    <!-- Display Section -->
+    <% if (reviews && reviews.length> 0) { %>
+<ul class="reviews-list">
+<% reviews.forEach(review=> { %>
+    <li class="review-item">
+        <p class="screen_name">
+            <strong>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15"
+                    height="15">
+                    <path
+                        d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464l349.5 0c-8.9-63.3-63.3-112-129-112l-91.4 0c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3z"  stroke="#485a3a" stroke-width="5" fill="#485a3a"/>
+                </svg>
+                <!-- Display the reviewer's screen name -->
+                <%= review.screen_name %>              
+            </strong> 
+            <span class="review-date">
+                &#8226; <%= new Date(review.review_date).toDateString() %> &#8226;
+            </span>
+        </p>
+        <p class="review-text"> "<%= review.review_text %>" </p>
+        </li>
+        <% }) %>
+    </ul>
+<% } else { %>
+    <p>No reviews for this vehicle yet.</p>
     <% } %>
+</div>
+
+<!-- Add Review Section -->
+<div class="form-container">
+<!-- Check if the user is logged in -->
+<% if (locals.loggedin) { %>
+    <form action="/account/reviews/add" method="post" class="inventory-form">
+        <input type="hidden" name="inv_id"
+            value="<%= locals.inv_id %>">
+        <input type="hidden" name="account_id"
+            value="<%= locals.accountData.account_id %>">
+        <input type="hidden" name="screen_name"
+            value="<%= locals.accountData.account_firstname[0] + locals.accountData.account_lastname %>">
+            <p>Add your review</p>
+            <label for="screen_name">User Name:</label>
+    <input type="text" name="screen_name" disabled id="screen_name" value="<%= locals.accountData.account_firstname[0] + locals.accountData.account_lastname %>">
+        <div class="input-wrapper">
+            <label for="review-text">Leave a review:</label>
+            <textarea name="review_text"
+                id="review-text" required title="Add a review minimum of 1 character" placeholder="Add a review minimum of 1 character" maxlength="500" rows="5" cols="50" minlength="1"></textarea>
+        </div>
+        <div class="input-wrapper">
+            <input type="submit" value="Submit Review"
+                class="login-btn">
+        </div>
+    </form>
+    <% } else { %>
+        <p>Please <a href="/account/login">log in</a> to add a
+            review.</p>
+        <% } %>
+</div>
+
+
+</div> <!-- End of review-section -->
+<% } %> <!-- End of title check -->
+
+<script>
+    window.onload = function () {
+        const flashMessage = document.getElementById('flash-message');
+        if (flashMessage && flashMessage.innerHTML.trim() !== '') {
+            window.scrollTo({
+                top: flashMessage.offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    };
+</script>

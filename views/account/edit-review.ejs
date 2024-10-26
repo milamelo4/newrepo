@@ -1,0 +1,43 @@
+<div class="form-container">
+    <h1 class="title-login">
+        <%= title %>        
+    </h1>
+    <h2 class="sec-title"> "<%= title2 %>"</h2>
+    
+    <!-- Display Flash msg -->
+    <%- messages() %>
+    
+        <!-- Validation Errors -->
+        <% if (errors) { %>
+            <ul>
+                <% errors.forEach(error=> { %>
+                    <li>
+                        <%= error.msg %>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } %>
+    
+    <form action="/account/reviews/update" method="POST" class="inventory-form">
+        <input type="hidden" name="review_id" value="<%= locals.review_id %>">
+        <input type="hidden" name="inv_id" value="<%= locals.inv_id %>">
+    
+        <div class="input-wrapper">
+            <label for="review_text">Edit your review:</label>
+            <textarea id="review_text" name="review_text" required
+                title="Update your review" maxlength="500" rows="5" cols="50" minlength="5">
+                <%= locals.review_text.trim() %>
+            </textarea>
+        </div>
+    
+        <div class="input-wrapper">
+            <label for="review_date">Review Date:</label>
+            <input type="text" id="review_date" name="review_date" disabled class="review-date"
+                value="<%= new Date(locals.review_date).toDateString() %>">
+        </div>
+    
+        <div class="input-wrapper">
+            <input type="submit" value="Update Review" class="login-btn">
+        </div>
+    </form>
+</div>

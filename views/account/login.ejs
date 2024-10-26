@@ -17,24 +17,24 @@
         <% } %>
     
         <!-- Login Form -->
-        <form action="/account/login" method="POST" class="login-form">
-            <div class="input-wrapper">
-                <label for="account_email">Email Address:<span class="red-star">*</span></label>
-                <input type="email" id="account_email" name="account_email" required placeholder="Enter a valid email address" value="<%= locals.account_email %>">
-            </div>
-    
-            <label for="account_password">Password:<span class="red-star">*</span></label>
-            <div class="pass-req input-wrapper">
-                <input type="password" id="account_password" name="account_password"
-                    required
-                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-                <span class="pass-requ">*Passwords must be at least 12 characters and contain at least 1
-                    number, 1 capital letter and 1 special character</span>
-            </div>
-    
-            <button type="submit" class="login-btn">Login</button>
-        </form>
-        <!-- Registration Link -->
-            <p class="new-account">Don't have an account? <a href="/account/register">Register here</a></p> <!-- refer client back to register form -->
+    <form action="/account/login" method="POST" class="login-form">
+        <div class="input-wrapper">
+            <label for="account_email">Email Address:<span class="red-star">*</span></label>
+            <input type="email" id="account_email" name="account_email" required placeholder="Enter a valid email address" value="<%= locals.account_email %>">
+        </div>
+
+        <label for="account_password">Password:<span class="red-star">*</span></label>
+        <div class="pass-req input-wrapper">
+            <input type="password" id="account_password" name="account_password"
+                required
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+            <span class="pass-requ">*Passwords must be at least 12 characters and contain at least 1
+                number, 1 capital letter and 1 special character</span>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+    </form>
+    <!-- Registration Link -->
+    <p class="new-account">Don't have an account? <a href="/account/register">Register here</a></p> <!-- refer client back to register form -->
 </div>
     
