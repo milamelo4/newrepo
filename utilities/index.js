@@ -117,7 +117,6 @@ return grid;
 /* **************************************
 * Build the management grid
 * ************************************ */
-
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications();
   let classificationList =

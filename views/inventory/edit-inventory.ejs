@@ -6,18 +6,18 @@
         </h1>
         <% } else { res.redirect('/') } %>
     
-            <!-- Display Flash msg -->
-            <%- messages() %>
-    
-                <% if (errors) { %>
-                    <ul class="notice">
-                        <% errors.array().forEach(error=> { %>
-                            <li>
-                                <%= error.msg %>
-                            </li>
-                            <% }) %>
-                    </ul>
-                    <% } %>
+<!-- Display Flash msg -->
+<%- messages() %>
+
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error=> { %>
+                <li>
+                    <%= error.msg %>
+                </li>
+                <% }) %>
+        </ul>
+        <% } %>
     
     <form id="inventoryForm" class="inventory-form"
         action="/inv/update" method="POST">

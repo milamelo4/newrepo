@@ -164,5 +164,4 @@ module.exports = {
   findClassificationByName,
   updateInventory,
   deleteInventoryItem,
-  
 };

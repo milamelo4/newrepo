@@ -81,40 +81,39 @@ validate.checkRegData = async (req, res, next) => {
 /*  **********************************
   *  Login Data Validation Rules
   * ********************************* */
-  validate.loginRules = () => {
-    return [   
-
-      // valid email is required and cannot already exist in the database
-      body("account_email")
-        .trim()
-        .isEmail()
-        .normalizeEmail() // refer to validator.js docs
-        .withMessage("A valid email is required.")
-        .custom(async (account_email) => {
-          const emailExists = await accountModel.checkExistingEmail(
-            account_email
+validate.loginRules = () => {
+  return [   
+    // valid email is required and cannot already exist in the database
+    body("account_email")
+      .trim()
+      .isEmail()
+      .normalizeEmail() // refer to validator.js docs
+      .withMessage("A valid email is required.")
+      .custom(async (account_email) => {
+        const emailExists = await accountModel.checkExistingEmail(
+          account_email
+        );
+        if (!emailExists) {
+          throw new Error(
+            "Email does not match. Please log using an existing account or register with a different email"
           );
-          if (!emailExists) {
-            throw new Error(
-              "Email does not match. Please log using an existing account or register with a different email"
-            );
-          }
-        }),
+        }
+      }),
 
-      // password is required and must be strong password
-      body("account_password")
-        .trim()
-        .notEmpty()
-        .isStrongPassword({
-          minLength: 12,
-          minLowercase: 1,
-          minUppercase: 1,
-          minNumbers: 1,
-          minSymbols: 1,
-        })
-        .withMessage("Password does not meet requirements."),
-    ];
-  }
+    // password is required and must be strong password
+    body("account_password")
+      .trim()
+      .notEmpty()
+      .isStrongPassword({
+        minLength: 12,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+      })
+      .withMessage("Password does not meet requirements."),
+  ];
+}
 
 validate.checkLogData = async (req, res, next) => {
 const { account_email } = req.body;

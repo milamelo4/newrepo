@@ -28,6 +28,7 @@ async function getReviewsByInventoryId(inv_id) {
       FROM review
       JOIN account ON review.account_id = account.account_id
       WHERE review.inv_id = $1
+      ORDER BY review_date DESC
     `;
     const result = await pool.query(sql, [inv_id]);
     return result.rows; // Returns an array of reviews with the dynamically generated screen_name

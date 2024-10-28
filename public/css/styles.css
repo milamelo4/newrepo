@@ -77,7 +77,6 @@ nav ul {
 nav li {
   color: var(--text-white);
   list-style: none;
-  /* margin-inline: 10px; */
   justify-content: center;
   font-size: 18px;
   padding-block: 4%; 
@@ -266,7 +265,6 @@ hr {
   font-size: clamp(20px, 5vw, 18px);
   padding: 10px;
   white-space: pre-wrap;
-  /* margin-block: 10px; */
 }
 
 .call-today {
@@ -285,9 +283,7 @@ hr {
 /**** Login Form ****/
 .notice {
   color: rgb(82, 4, 4);
-
   background-color: rgb(251, 232, 232);;
- 
   padding: 10px;
   border-radius: 5px;
   list-style: none;
@@ -398,8 +394,6 @@ hr {
   background-color: var(--light-green);
 }
 
-
-
 /**** Validations Form ****/
 .input-wrapper input:required:invalid,
 .input-wrapper input:focus:invalid,
@@ -489,8 +483,6 @@ table {
 }
 
 .button_cont a:hover {
-  /* background-color: var(--light-green);
-  color: var(--dark-green); */
   font-weight: 500;
   text-decoration: underline;
 }
@@ -515,10 +507,9 @@ table {
 .review-container li {
   margin-bottom: 10px;
   background-color: var(--light-green);
-  padding: 2.5%;
+  padding: 15px 25px;
   border-radius: 10px;
-  /* border: 1px solid var(--dark-green); */
-  width: 320px;
+  width: 350px;
   margin: 10px;
   height: auto;
   box-shadow: 0 0 20px var(--darker-blue);
@@ -596,12 +587,14 @@ table {
   nav li {
     padding-block: 2%;
   }
+
   nav li a {
     border-bottom: 1px solid transparent;
     border-top: 1px solid transparent;
     padding: 10px;
     transition: all 0.3s ease 0s;
   }
+
   nav li a:hover {
     border-bottom: 2px solid var(--text-white);
     border-top: 2px solid var(--text-white);
@@ -735,7 +728,6 @@ table {
     grid-template-columns: 500px 1fr;
     grid-template-rows: 1fr;
     border-radius: 5px;
-    /* overflow: hidden; */
     gap: 20px;
     background-color: var(--light-green);
     box-shadow: 0 0 20px var(--darker-blue);
@@ -900,12 +892,10 @@ table {
   }
 
   /****** Account Management ******/
-
   a {
     color: var(--text-black);
   }
-    
-  }
+}
 
 
 

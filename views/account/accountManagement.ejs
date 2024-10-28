@@ -4,7 +4,6 @@
 
 <!-- Display Flash msg -->
 <%- messages() %>
-
 <% if (errors) { %>
     <ul>
         <% errors.array().forEach(error=> { %>
@@ -34,64 +33,62 @@
                 <% } %>
 
 <!-- Admin View for All Reviews -->
-<div class="review-admin">
-    <% if (accountData.account_type==='Admin' ) { %>
-        <%- messages() %>
-        <h3>All Reviews (Admin View)</h3>
-        <% if (reviews && reviews.length> 0) { %>
-    <ol>
-        <% reviews.forEach(review=> { %>
-            <li>
-                <strong>
-                    <%= review.account_firstname[0] +
-                        review.account_lastname %>:
-                </strong>
-                <%= review.review_text %> on <%= review.inv_make %>
-                        <%= review.inv_model %>
-                    <!-- Links for Admin -->
-                    <div>
-                        <a href="/account/reviews/edit/<%= review.review_id %>"
-                            title="Edit this review">Edit</a> |
-                        <a href="/account/reviews/delete/<%= review.review_id %>"
-                            title="Delete this review">Delete</a>
-                    </div>
-            </li>
-        <% }) %>
-    </ol>
-    <% } else { %>
-        <p>No reviews have been written yet.</p>
-        <% } %>
-            <% } else { %>
-</div>
-
-<!-- User's Review -->
-<div class="review-admin">
-    <h3>Your Reviews</h3>
-    <% if (reviews && reviews.length> 0) { %>
-        <%- messages() %>
+    <div class="review-admin">
+        <% if (accountData.account_type==='Admin' ) { %>
+            <%- messages() %>
+            <h3>All Reviews (Admin View)</h3>
+            <% if (reviews && reviews.length> 0) { %>
         <ol>
             <% reviews.forEach(review=> { %>
-            <li>
-                <strong>You:</strong>
-                <%= review.review_text %> on <%=
-                        review.inv_make %>
-                        <%= review.inv_model %>
-    
-                        <!-- Edit and Delete Links for User -->
+                <li>
+                    <strong>
+                        <%= review.account_firstname[0] +
+                            review.account_lastname %>:
+                    </strong>
+                    <%= review.review_text %> on <%= review.inv_make %>
+                            <%= review.inv_model %>
+                        <!-- Links for Admin -->
                         <div>
                             <a href="/account/reviews/edit/<%= review.review_id %>"
-                                title="Edit your review">Edit</a> |
+                                title="Edit this review">Edit</a> |
                             <a href="/account/reviews/delete/<%= review.review_id %>"
-                                title="Delete your review">Delete</a>
+                                title="Delete this review">Delete</a>
                         </div>
-            </li>
+                </li>
             <% }) %>
         </ol>
         <% } else { %>
-            <p>You haven't written any reviews yet.</p>
+            <p>No reviews have been written yet.</p>
             <% } %>
+                <% } else { %>
+    </div>
+
+    <!-- User's Review -->
+    <div class="review-admin">
+        <h3>Your Reviews</h3>
+        <% if (reviews && reviews.length> 0) { %>
+            <%- messages() %>
+            <ol>
+                <% reviews.forEach(review=> { %>
+                <li>
+                    <strong>You:</strong>
+                    <%= review.review_text %> on <%=
+                            review.inv_make %>
+                            <%= review.inv_model %>
+        
+                            <!-- Edit and Delete Links for User -->
+                            <div>
+                                <a href="/account/reviews/edit/<%= review.review_id %>"
+                                    title="Edit your review">Edit</a> |
+                                <a href="/account/reviews/delete/<%= review.review_id %>"
+                                    title="Delete your review">Delete</a>
+                            </div>
+                </li>
+                <% }) %>
+            </ol>
+            <% } else { %>
+                <p>You haven't written any reviews yet.</p>
                 <% } %>
-</div>
-
-
+                    <% } %>
+    </div>
 </div>     

@@ -93,7 +93,7 @@ reviewController.updateReview = async function (req, res, next) {
       });
     }
   } catch (error) {
-    console.error("Error updating review:", error); // Log any error for debugging
+    console.error("Error updating review:", error); 
     req.flash("notice", "Error updating review. Please try again.");
     return res.redirect("/account");
   }
