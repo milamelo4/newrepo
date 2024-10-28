@@ -45,8 +45,13 @@
                         <%= review.account_firstname[0] +
                             review.account_lastname %>:
                     </strong>
-                    <%= review.review_text %> on <%= review.inv_make %>
-                            <%= review.inv_model %>
+                    <%= review.review_text %>  
+                    <div>
+                        <strong>
+                            <span><%= new Date(review.review_date).toDateString() %> for <%= review.inv_make %>
+                                <%= review.inv_model %></span>
+                        </strong>
+                    </div>
                         <!-- Links for Admin -->
                         <div>
                             <a href="/account/reviews/edit/<%= review.review_id %>"
